@@ -94,21 +94,9 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 
-export default {
-  name: "LayoutDefault",
-
-  components: {
-    HelloWorld,
-  },
-
-  setup() {
-    return {
-      leftDrawerOpen: ref(false),
-    };
-  },
-};
+const leftDrawerOpen = ref(false);
 </script>
