@@ -31,13 +31,15 @@
 
 <script setup>
 import { ref } from "vue";
+import { useCheatSheetStore } from "stores/cheatsheetStore.js";
+const store = useCheatSheetStore();
+const state = store.sheet;
+const addSheet = store.addSheet;
 
 const text = ref();
-const state = ref([]);
 const cheatInput = ref();
-
 function onSubmit() {
-  if (text.value) state.value.push(text.value);
+  if (text.value) addSheet(text.value);
   onReset();
 }
 
