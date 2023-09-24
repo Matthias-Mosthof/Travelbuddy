@@ -8,7 +8,7 @@
         focused
         label="Your Cheat here"
         autofocus
-        ref="cheatInput"
+        ref="newSheet"
         :rules="[
           (val) =>
             (val && val.length > 0) || val === null || 'Bitte schreibe etwas',
@@ -30,22 +30,28 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const store = useCheatSheetStore();
-const state = store.sheets;
-const { addSheet } = store;
+const state = ref(store.sheets);
+const { setLocalStorage, addSheet, getLocalStorage } = store;
 
 const text = ref();
-const cheatInput = ref();
+const newSheet = ref();
+
 function onSubmit() {
   if (text.value) addSheet(text.value);
+  setLocalStorage(state.value);
   onReset();
 }
 
+onMounted(() => {
+  getLocalStorage();
+});
+
 function onReset() {
   text.value = null;
-  cheatInput.value.focus();
+  newSheet.value.focus();
 }
 </script>
