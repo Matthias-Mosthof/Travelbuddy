@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("counter", {
+export const useCheatSheetStore = defineStore("cheatSheet", {
   state: () => ({
-    counter: 0,
+    sheet: [],
   }),
 
   getters: {
-    doubleCount(state) {
-      return state.counter * 2;
+    removeLastSheet(state) {
+      return state.sheet.pop();
     },
   },
 
   actions: {
-    increment() {
-      this.counter++;
+    addSheet(userInput) {
+      this.sheet.push(userInput);
     },
   },
 });
