@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
 
-export const useCheatSheetStore = defineStore("cheatSheet", {
+export const useCheatSheetStore = defineStore("sheets", {
   state: () => ({
-    sheet: [],
+    sheets: [],
   }),
 
   getters: {
     removeLastSheet(state) {
-      return state.sheet.pop();
+      return state.sheets.pop();
     },
   },
 
   actions: {
     addSheet(userInput) {
-      this.sheet.push(userInput);
+      this.sheets.push(userInput);
     },
   },
 });

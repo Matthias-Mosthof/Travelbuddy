@@ -30,11 +30,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
+
 const store = useCheatSheetStore();
-const state = store.sheet;
-const addSheet = store.addSheet;
+const state = store.sheets;
+const { addSheet } = store;
 
 const text = ref();
 const cheatInput = ref();
