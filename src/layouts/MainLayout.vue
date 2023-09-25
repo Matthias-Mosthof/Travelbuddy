@@ -1,27 +1,6 @@
 <template>
   <q-layout>
-    <div class="q-pa-md" style="max-width: 300px">
-      <div class="q-pa-md items-start q-gutter-md">
-        <q-card
-          v-for="(entry, i) in state"
-          :key="i"
-          dark
-          bordered
-          class="text-white my-card"
-          style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-        >
-          <q-card-section>
-            <div class="text-h6">
-              {{ entry.title }}
-            </div>
-          </q-card-section>
-
-          <q-card-section>
-            {{ entry.text }}
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+    <OneSheet />
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-btn
@@ -67,6 +46,7 @@
 import { ref, onMounted } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
+import OneSheet from "../components/OneSheet.vue";
 const toggleCard = ref(false);
 
 const store = useCheatSheetStore();
