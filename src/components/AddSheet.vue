@@ -37,34 +37,36 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed, ref } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const toggleCard = ref(false);
 
 const store = useCheatSheetStore();
-const state = ref(store.sheets);
+
+const state = computed(() => {
+  return store.getCheatSheets;
+});
 
 const { setLocalStorage, addSheet } = store;
 
-const text = ref();
 const newSheet = ref();
-
 const sheetTitle = ref();
 const sheetText = ref();
-const sheet = ref({});
 
 function onSubmit() {
-  if (sheetText.value) sheet.value.text = sheetText.value;
-  if (sheetTitle.value) sheet.value.title = sheetTitle.value;
-  addSheet(sheet.value);
+  const newSheet = {};
+  if (sheetText.value) newSheet.text = sheetText.value;
+  if (sheetTitle.value) newSheet.title = sheetTitle.value;
+  addSheet(newSheet);
   setLocalStorage(state.value);
   onReset();
   toggleCard.value = false;
 }
 
 function onReset() {
-  text.value = null;
+  sheetText.value = null;
+  sheetTitle.value = null;
   newSheet.value.focus();
 }
 </script>
