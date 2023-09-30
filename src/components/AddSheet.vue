@@ -45,7 +45,7 @@ const toggleCard = ref(false);
 const store = useCheatSheetStore();
 const state = ref(store.sheets);
 
-const { setLocalStorage, addSheet, getLocalStorage } = store;
+const { setLocalStorage, addSheet } = store;
 
 const text = ref();
 const newSheet = ref();
@@ -62,10 +62,6 @@ function onSubmit() {
   onReset();
   toggleCard.value = false;
 }
-
-onMounted(() => {
-  getLocalStorage();
-});
 
 function onReset() {
   text.value = null;
