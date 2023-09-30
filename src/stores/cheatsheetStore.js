@@ -5,12 +5,6 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     sheets: [],
   }),
 
-  getters: {
-    removeLastSheet(state) {
-      return state.sheets.pop();
-    },
-  },
-
   actions: {
     addSheet(userInput) {
       this.sheets.push(userInput);
@@ -28,6 +22,15 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
           this.sheets.push(element);
         });
       }
+    },
+  },
+  getters: {
+    getCheatSheets(state) {
+      return state.sheets;
+    },
+
+    removeLastSheet(state) {
+      return state.sheets.pop();
     },
   },
 });
