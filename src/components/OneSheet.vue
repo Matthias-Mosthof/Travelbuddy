@@ -24,8 +24,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
+
 const store = useCheatSheetStore();
-const state = ref(store.sheets);
+
+const state = computed(() => {
+  return store.getCheatSheets;
+});
 </script>
