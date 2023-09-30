@@ -7,6 +7,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
 
   actions: {
     addSheet(userInput) {
+      userInput.id = this.createID();
       this.sheets.push(userInput);
     },
 
@@ -23,7 +24,11 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
         });
       }
     },
+    createID() {
+      return Math.random(1, 10).toFixed(10).toString().replace(/^0\.?/, "");
+    },
   },
+
   getters: {
     getCheatSheets(state) {
       return state.sheets;
