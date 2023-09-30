@@ -1,6 +1,7 @@
 # Quasar App using the CLI with Vite
 
 - This is just a side Project, it progresses at inconsistent pace.
+- Its kind of sad there is the need to tell this, but no line was generated with ChatGPT or any other Code AI.
 
 ## Progress
 
