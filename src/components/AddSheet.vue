@@ -25,10 +25,7 @@
           type="textarea"
           label="Deine Beschreibung"
           ref="newSheet"
-          :rules="[
-            (val) =>
-              (val && val.length > 0) || val === null || 'Bitte schreibe etwas',
-          ]"
+          :rules="inputRule"
         />
         <q-btn color="primary" icon="check" label="Fire" type="submit" />
       </q-form>
@@ -53,6 +50,10 @@ const { setLocalStorage, addSheet } = store;
 const newSheet = ref();
 const sheetTitle = ref();
 const sheetText = ref();
+
+const inputRule = computed(() => [
+  (val) => (val && val.length > 0) || val === null || "Bitte schreibe etwas",
+]);
 
 function onSubmit() {
   const newSheet = {};
