@@ -1,13 +1,12 @@
 <template>
-  <div class="q-pa-md" style="max-width: 300px">
-    <div class="q-pa-md items-start q-gutter-md">
+  <div class="q-pa-md">
+    <div class="row q-gutter-md">
       <q-card
         v-for="(entry, i) in state"
         :key="i"
         dark
         bordered
         class="text-white my-card"
-        style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
       >
         <q-card-section>
           <div class="text-h6">
@@ -33,3 +32,10 @@ const state = computed(() => {
   return store.getCheatSheets;
 });
 </script>
+
+<style scoped>
+.my-card {
+  background: radial-gradient(circle, #35a2ff 0%, #014a88 100%);
+  width: 20rem;
+}
+</style>
