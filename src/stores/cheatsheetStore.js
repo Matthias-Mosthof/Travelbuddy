@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "src/Api/firebase";
 export const useCheatSheetStore = defineStore("cheatSheets", {
   state: () => ({
     sheets: [],
@@ -15,14 +16,11 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       localStorage.setItem("sheets", JSON.stringify(state));
     },
 
-    getLocalStorage() {
-      let storedsheets = localStorage.getItem("sheets");
-      storedsheets = JSON.parse(storedsheets);
-      if (storedsheets != undefined) {
-        storedsheets.forEach((element) => {
-          this.sheets.push(element);
-        });
-      }
+    async fetchFirebaseDB() {
+      const data = await getDocs(collection(db, "sheets"));
+      data.forEach((doc) => {
+        this.sheets.push(doc.data());
+      });
     },
     createID() {
       return Math.random(1, 10).toFixed(10).toString().replace(/^0\.?/, "");

@@ -10,9 +10,9 @@ import AddSheet from "src/components/AddSheet.vue";
 import { onMounted } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 const store = useCheatSheetStore();
-const { getLocalStorage } = store;
+const { fetchFirebaseDB } = store;
 
 onMounted(() => {
-  getLocalStorage();
+  fetchFirebaseDB();
 });
 </script>
