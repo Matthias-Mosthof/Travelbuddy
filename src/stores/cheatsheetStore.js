@@ -43,9 +43,6 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       });
       this.sheets = firebaseSheets;
     },
-    createID() {
-      return Math.random(1, 10).toFixed(10).toString().replace(/^0\.?/, "");
-    },
   },
 
   getters: {
