@@ -45,7 +45,7 @@ const state = computed(() => {
   return store.getCheatSheets;
 });
 
-const { setLocalStorage, addSheet } = store;
+const { addSheet } = store;
 
 const newSheet = ref();
 const sheetTitle = ref();
@@ -60,7 +60,6 @@ function onSubmit() {
   if (sheetText.value) newSheet.text = sheetText.value;
   if (sheetTitle.value) newSheet.title = sheetTitle.value;
   addSheet(newSheet);
-  setLocalStorage(state.value);
   onReset();
   toggleCard.value = false;
 }
