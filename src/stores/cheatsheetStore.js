@@ -1,19 +1,37 @@
 import { defineStore } from "pinia";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "src/Api/firebase";
+import { Notify } from "quasar";
+
 export const useCheatSheetStore = defineStore("cheatSheets", {
   state: () => ({
     sheets: [],
   }),
 
   actions: {
-    addSheet(userInput) {
-      userInput.id = this.createID();
-      this.sheets.push(userInput);
-    },
-
-    setLocalStorage(state) {
-      localStorage.setItem("sheets", JSON.stringify(state));
+    async addSheet(userInput) {
+      try {
+        // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
+        const docRef = await addDoc(collection(db, "sheets"), userInput);
+        await updateDoc(docRef, {
+          createdAt: serverTimestamp(),
+        });
+        Notify.create({
+          message: "Sheet added succesfully!",
+          type: "positive",
+        });
+      } catch (error) {
+        Notify.create({
+          message: "Error adding sheet: " + error.message,
+          type: "negative",
+        });
+      }
     },
 
     async fetchFirebaseDB() {
