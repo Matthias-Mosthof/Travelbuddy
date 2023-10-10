@@ -32,13 +32,16 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
           type: "negative",
         });
       }
+      this.fetchFirebaseDB();
     },
 
     async fetchFirebaseDB() {
       const data = await getDocs(collection(db, "sheets"));
+      const firebaseSheets = [];
       data.forEach((doc) => {
-        this.sheets.push(doc.data());
+        firebaseSheets.push(doc.data());
       });
+      this.sheets = firebaseSheets;
     },
     createID() {
       return Math.random(1, 10).toFixed(10).toString().replace(/^0\.?/, "");
