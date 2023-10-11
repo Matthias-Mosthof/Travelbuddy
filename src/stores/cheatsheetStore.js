@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import {
+  where,
   deleteDoc,
   doc,
   collection,
@@ -13,6 +14,8 @@ import {
 import { db } from "src/Api/firebase";
 import { Notify } from "quasar";
 
+const sheetsRef = collection(db, "sheets");
+
 export const useCheatSheetStore = defineStore("cheatSheets", {
   state: () => ({
     sheets: [],
@@ -21,13 +24,9 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
   actions: {
     async addSheet(userInput) {
       try {
-        const id = this.createId();
         // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        const docRef = await addDoc(collection(db, "sheets"), {
-          ...userInput,
-          id,
-        });
-        await updateDoc(docRef, {
+        const sheetRef = await addDoc(collection(db, "sheets"), userInput);
+        await updateDoc(sheetRef, {
           createdAt: serverTimestamp(),
         });
         Notify.create({
@@ -47,21 +46,23 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       let data = await getDocs(collection(db, "sheets"));
       const firebaseSheets = [];
       data.forEach((doc) => {
-        firebaseSheets.push(doc.data());
+        let sheet = {
+          id: doc.id,
+          ...doc.data(),
+        };
+        firebaseSheets.push(sheet);
       });
       this.sheets = firebaseSheets;
     },
 
     async removeSheet(id) {
       try {
-        await deleteDoc(doc(db, "sheets", id));
-        console.log("successfully deleted document " + id);
+        await deleteDoc(doc(sheetsRef, id));
+        this.fetchFirebaseDB();
+        console.log("successfully deleted document with id" + id);
       } catch (error) {
-        console.log("tst");
+        console.log("error: " + error);
       }
-    },
-    createId() {
-      return Math.random(1, 10).toFixed(10).toString().replace(/^0\.?/, "");
     },
   },
 
