@@ -62,9 +62,7 @@ const state = computed(() => {
 });
 
 function triggerRemove(entry) {
-  console.log(entry.id, "heeere");
-  removeSheet(docId);
-  console.log("remooove");
+  removeSheet(entry.id);
 }
 </script>
 
