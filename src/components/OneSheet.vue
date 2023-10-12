@@ -7,16 +7,13 @@
         dark
         flat
         bordered
-        class="text-white my-card"
+        class="my-card q-pa-md"
       >
         <q-card-section>
           <div class="row items-center no-wrap">
             <div class="col">
               <div class="text-h6">
                 {{ entry.title }}
-              </div>
-              <div class="text-subtitle2">
-                {{ entry.createdAt }}
               </div>
             </div>
 
@@ -45,13 +42,22 @@
         <q-card-section>
           {{ entry.text }}
         </q-card-section>
+        <!-- TODO: Use JS Date Entry for every new sheet instead of firebase timestamp to consume it more conviently -->
+        <div class="text-subtitle3 text-grey-6 q-pl-md">
+          Created at
+          {{
+            entry.createdAt.toDate().toDateString() +
+            ", " +
+            entry.createdAt.toDate().toLocaleTimeString("de-DE")
+          }}
+        </div>
       </q-card>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const store = useCheatSheetStore();
