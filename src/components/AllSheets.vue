@@ -1,6 +1,13 @@
 <template>
   <div class="q-pa-md">
-    <div class="row q-gutter-md">
+    <TransitionGroup
+      tag="div"
+      appear
+      enter-active-class="animated fadeIn"
+      enter-leave-class="animated fadeOut"
+      v-bind="$attrs"
+      class="row q-gutter-md"
+    >
       <q-card
         v-for="(entry, i) in filteredState"
         :key="i"
@@ -52,12 +59,12 @@
           }}
         </div>
       </q-card>
-    </div>
+    </TransitionGroup>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, defineOptions } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const store = useCheatSheetStore();
