@@ -5,7 +5,6 @@
       appear
       enter-active-class="animated fadeIn"
       enter-leave-class="animated fadeOut"
-      v-bind="$attrs"
       class="row q-gutter-md"
     >
       <q-card
@@ -64,7 +63,7 @@
 </template>
 
 <script setup>
-import { computed, defineOptions } from "vue";
+import { computed } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const store = useCheatSheetStore();
