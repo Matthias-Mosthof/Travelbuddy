@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import {
-  where,
   deleteDoc,
   doc,
   collection,
@@ -8,8 +7,6 @@ import {
   getDocs,
   serverTimestamp,
   updateDoc,
-  orderBy,
-  query,
 } from "firebase/firestore";
 import { db } from "src/Api/firebase";
 import { Notify } from "quasar";
@@ -19,6 +16,7 @@ const sheetsRef = collection(db, "sheets");
 export const useCheatSheetStore = defineStore("cheatSheets", {
   state: () => ({
     sheets: [],
+    filter: "",
   }),
 
   actions: {
@@ -70,7 +68,9 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     getCheatSheets(state) {
       return state.sheets;
     },
-
+    getFilter(state) {
+      return state.filter;
+    },
     removeLastSheet(state) {
       return state.sheets.pop();
     },

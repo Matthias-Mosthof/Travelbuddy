@@ -1,10 +1,10 @@
 <template>
-  <OneSheet />
+  <AllSheets />
   <AddSheet />
 </template>
 
 <script setup>
-import OneSheet from "src/components/OneSheet.vue";
+import AllSheets from "src/components/AllSheets.vue";
 import AddSheet from "src/components/AddSheet.vue";
 
 import { onMounted } from "vue";
