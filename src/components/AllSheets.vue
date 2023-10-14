@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="row q-gutter-md">
       <q-card
-        v-for="(entry, i) in state"
+        v-for="(entry, i) in filteredState"
         :key="i"
         dark
         flat
@@ -57,14 +57,22 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useCheatSheetStore } from "stores/cheatsheetStore.js";
 
 const store = useCheatSheetStore();
 const { removeSheet } = store;
 
-const state = computed(() => {
-  return store.getCheatSheets;
+const state = computed(() => store.getCheatSheets);
+
+const filter = computed(() => store.getFilter);
+
+const filteredState = computed(() => {
+  return state.value.filter((sheet) => {
+    return (
+      sheet.text.includes(filter.value) || sheet.title.includes(filter.value)
+    );
+  });
 });
 
 function triggerRemove(entry) {

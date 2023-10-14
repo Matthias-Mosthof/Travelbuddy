@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-
-const searchTerm = ref("");
+import { useCheatSheetStore } from "src/stores/cheatsheetStore";
+const store = useCheatSheetStore();
 
 defineProps({
   placeholder: {
@@ -14,9 +14,9 @@ defineProps({
 <template>
   <q-input
     filled
-    v-model="searchTerm"
+    v-model="store.filter"
     type="search"
-    debounce="300"
+    debounce="100"
     :placeholder="placeholder"
     bg-color="info"
   >
