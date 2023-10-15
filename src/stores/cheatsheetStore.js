@@ -73,13 +73,18 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       return state.filter;
     },
     getCategories(state) {
+      const categories = [];
       const sheetsWithCategory = state.sheets.filter((sheet) => {
         if (sheet.category) return sheet.category;
       });
+
       sheetsWithCategory.forEach((sheet) => {
-        this.categories.push(sheet.category);
+        if (!categories.includes(sheet.category))
+          categories.push(sheet.category);
       });
-      return this.categories;
+      const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
+      state.categories = sortedCategories;
+      return state.categories;
     },
     removeLastSheet(state) {
       return state.sheets.pop();
