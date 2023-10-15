@@ -57,6 +57,7 @@
             entry.createdAt.toDate().toLocaleTimeString("de-DE")
           }}
         </div>
+        <div>{{ entry.category }}</div>
       </q-card>
     </TransitionGroup>
   </div>
@@ -72,11 +73,14 @@ const { removeSheet } = store;
 const state = computed(() => store.getCheatSheets);
 
 const filter = computed(() => store.getFilter);
+const selectedCategories = computed(() => store.getSelectedCategories);
 
 const filteredState = computed(() => {
   return state.value.filter((sheet) => {
     return (
-      sheet.text.includes(filter.value) || sheet.title.includes(filter.value)
+      (sheet.text?.includes(filter.value) ||
+        sheet.title?.includes(filter.value)) &&
+      sheet.category?.includes(selectedCategories.value)
     );
   });
 });
