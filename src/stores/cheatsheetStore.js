@@ -17,6 +17,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
   state: () => ({
     sheets: [],
     filter: "",
+    categories: [],
   }),
 
   actions: {
@@ -70,6 +71,15 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     },
     getFilter(state) {
       return state.filter;
+    },
+    getCategories(state) {
+      const sheetsWithCategory = state.sheets.filter((sheet) => {
+        if (sheet.category) return sheet.category;
+      });
+      sheetsWithCategory.forEach((sheet) => {
+        this.categories.push(sheet.category);
+      });
+      return this.categories;
     },
     removeLastSheet(state) {
       return state.sheets.pop();
