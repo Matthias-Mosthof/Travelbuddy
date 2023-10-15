@@ -18,6 +18,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     sheets: [],
     filter: "",
     categories: [],
+    selectedCategories: [],
   }),
 
   actions: {
@@ -63,6 +64,10 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
         console.log("error: " + error);
       }
     },
+
+    addSelectedCategorie(selection) {
+      this.selectedCategories = selection;
+    },
   },
 
   getters: {
@@ -73,7 +78,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       return state.filter;
     },
     getCategories(state) {
-      const categories = [];
+      let categories = [];
       const sheetsWithCategory = state.sheets.filter((sheet) => {
         if (sheet.category) return sheet.category;
       });
@@ -86,8 +91,8 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       state.categories = sortedCategories;
       return state.categories;
     },
-    removeLastSheet(state) {
-      return state.sheets.pop();
+    getSelectedCategories(state) {
+      return state.selectedCategories;
     },
   },
 });
