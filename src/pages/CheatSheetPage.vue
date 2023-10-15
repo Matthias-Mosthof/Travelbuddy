@@ -1,9 +1,11 @@
 <template>
+  <CategorieComp />
   <AllSheets />
   <AddSheet />
 </template>
 
 <script setup>
+import CategorieComp from "src/components/CategorieComp.vue";
 import AllSheets from "src/components/AllSheets.vue";
 import AddSheet from "src/components/AddSheet.vue";
 

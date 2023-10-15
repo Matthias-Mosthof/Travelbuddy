@@ -27,6 +27,13 @@
           ref="newSheet"
           :rules="inputRule"
         />
+        <q-input
+          filled
+          v-model="sheetCategory"
+          type="text"
+          label="Kategorie (optional)"
+          ref="newSheet"
+        />
         <q-btn color="primary" icon="check" label="Fire" type="submit" />
       </q-form>
     </div>
@@ -41,15 +48,12 @@ const toggleCard = ref(false);
 
 const store = useCheatSheetStore();
 
-const state = computed(() => {
-  return store.getCheatSheets;
-});
-
 const { addSheet } = store;
 
 const newSheet = ref();
 const sheetTitle = ref();
 const sheetText = ref();
+const sheetCategory = ref();
 
 const inputRule = computed(() => [
   (val) => (val && val.length > 0) || val === null || "Bitte schreibe etwas",
@@ -59,6 +63,7 @@ function onSubmit() {
   const newSheet = {};
   if (sheetText.value) newSheet.text = sheetText.value;
   if (sheetTitle.value) newSheet.title = sheetTitle.value;
+  newSheet.category = sheetCategory.value || "";
   addSheet(newSheet);
   onReset();
   toggleCard.value = false;
