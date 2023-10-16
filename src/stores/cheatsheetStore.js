@@ -68,6 +68,16 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     addSelectedCategorie(selection) {
       this.selectedCategories = selection;
     },
+    storeSheetsWithCategories(sheetsWithCategory) {
+      let categories = [];
+
+      sheetsWithCategory.forEach((sheet) => {
+        if (!categories.includes(sheet.category))
+          categories.push(sheet.category);
+      });
+      const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
+      this.categories = sortedCategories;
+    },
   },
 
   getters: {
@@ -77,18 +87,14 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     getFilter(state) {
       return state.filter;
     },
-    getCategories(state) {
-      let categories = [];
-      const sheetsWithCategory = state.sheets.filter((sheet) => {
+    getSheetsWithCategories(state) {
+      return state.sheets.filter((sheet) => {
         if (sheet.category) return sheet.category;
       });
-
-      sheetsWithCategory.forEach((sheet) => {
-        if (!categories.includes(sheet.category))
-          categories.push(sheet.category);
-      });
-      const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
-      state.categories = sortedCategories;
+    },
+    getCategories(state) {
+      const sheetsWithCategory = this.getSheetsWithCategories;
+      this.storeSheetsWithCategories(sheetsWithCategory);
       return state.categories;
     },
     getSelectedCategories(state) {

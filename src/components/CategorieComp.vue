@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-sm">
-      <q-checkbox
+      <q-radio
         v-for="item in categories"
         :key="item"
         v-model="selection"
