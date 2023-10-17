@@ -35,7 +35,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
         });
       } catch (error) {
         Notify.create({
-          message: "Error deleting sheet: " + error.message,
+          message: "Error adding sheet: " + error.message,
           type: "negative",
         });
       }
@@ -65,7 +65,7 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
         });
       } catch (error) {
         Notify.create({
-          message: "Error adding sheet: " + error.message,
+          message: "Error deleting sheet: " + error.message,
           type: "negative",
         });
       }
