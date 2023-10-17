@@ -59,9 +59,15 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
       try {
         await deleteDoc(doc(sheetsRef, id));
         this.fetchFirebaseDB();
-        console.log("successfully deleted document with id" + id);
+        Notify.create({
+          message: "Sheet deleted succesfully",
+          type: "positive",
+        });
       } catch (error) {
-        console.log("error: " + error);
+        Notify.create({
+          message: "Error adding sheet: " + error.message,
+          type: "negative",
+        });
       }
     },
 
