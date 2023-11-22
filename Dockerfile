@@ -1,7 +1,14 @@
 FROM node:lts-alpine
+
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn global add @quasar/cli
-RUN yarn install
-EXPOSE 9000
-CMD ["yarn", "dev"]
+
+RUN apk update && apk upgrade
+RUN apk add git
+
+COPY ./package*.json /app/
+
+RUN npm install && npm cache clean --force
+
+COPY . .
+
+ENV PATH ./node_modules/.bin/:$PATH

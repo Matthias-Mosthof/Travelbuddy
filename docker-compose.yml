@@ -1,11 +1,14 @@
-version: "3"
+version: "3.3"
+
 services:
-  quasar:
-    build: .
-    stdin_open: true
-    tty: true
-    ports:
-      - "9000:9000"
+  nuxt:
+    build:
+      context: .
+    image: nuxt_dev
+    container_name: nuxt_test_project
+    command: npm run dev
     volumes:
-      - ".:/app"
-      - "/app/node_modules"
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
