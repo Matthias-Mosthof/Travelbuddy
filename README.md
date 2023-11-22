@@ -1,6 +1,6 @@
-# Quasar App using the CLI with Vite
+# Dockerized Nuxt (Vite) App using Quasar & Pinia Module
 
-- Just a small Test Project using Nuxt with Quasar & Pinia Module w/Firebase DB.
+- Just a small Test Project using Nuxt w/Firebase DB.
 - Its kind of sad there is the need to tell this, but no line was generated with ChatGPT or any other Code AI.
 
 ## Progress
@@ -23,45 +23,4 @@ The Dockerfile will take care of installing packages, quasar etc
 docker compose up
 ```
 
-# Or without Docker
-
-## Install the dependencies
-
-```bash
-yarn
-# or
-npm install
-```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-
-```bash
-quasar dev
-```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-> > > > > > > Stashed changes
-> > > > > > > See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+Thats it! :) No need to install any dependecies locally.
