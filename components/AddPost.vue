@@ -9,34 +9,37 @@
     />
   </q-page-sticky>
 
-  <q-dialog v-model="toggleCard">
+  <q-dialog v-model="toggleCard" persistent>
     <div>
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
+          class="rounded-borders bg-green-3"
           v-model="postTitle"
-          bg-color="indigo-2"
           type="text"
           label="Überschrift"
           filled
           required
+          standout="bg-green-4 text-white"
         />
         <q-input
+          class="rounded-borders bg-green-3"
           filled
           v-model="postText"
           type="textarea"
           label="Deine Beschreibung"
           ref="newPost"
-          :rules="inputRule"
+          standout="bg-green-4 text-white"
           required
         />
         <q-input
+          class="rounded-borders bg-green-3"
           filled
           v-model="postEmail"
           type="email"
-          label="Deine E-Mail"
+          label="Deine E-Mail (wird nicht veröffentlicht)"
           ref="newPost"
-          :rules="inputRule"
           required
+          standout="bg-green-4 text-white"
         />
         <!-- <q-input
           filled
@@ -45,7 +48,19 @@
           label="Kategorie (optional)"
           ref="newSheet"
         /> -->
-        <q-btn color="primary" icon="check" label="Fire" type="submit" />
+        <q-btn
+          color="primary"
+          icon="check"
+          label="Veröffentlichen"
+          type="submit"
+        />
+        <q-btn
+          color="secondary"
+          icon="cancel"
+          label="Abbrechen"
+          type="cancel"
+          v-close-popup
+        />
       </q-form>
     </div>
   </q-dialog>
