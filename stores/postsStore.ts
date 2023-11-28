@@ -24,7 +24,7 @@ export const usePostsStore = defineStore("posts", {
     async addPost(title: string, text: string) {
       try {
         // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        const newPost: Post = { title, text };
+        const newPost: NewPost = { title, text };
 
         // this.posts.push(newPost);
 
@@ -60,29 +60,29 @@ export const usePostsStore = defineStore("posts", {
       this.posts = posts;
     },
 
-    async removePost(id) {
+    async removePost(id: string) {
       try {
-        await deleteDoc(doc(sheetsRef, id));
+        await deleteDoc(doc(postsRef, id));
         this.fetchFirebaseDB();
-        console.log("successfully deleted document with id" + id);
+        console.log("successfully deleted document with id " + id);
       } catch (error) {
         console.log("error: " + error);
       }
     },
 
-    addSelectedCategorie(selection) {
-      this.selectedCategories = selection;
-    },
-    storeSheetsWithCategories(sheetsWithCategory) {
-      let categories = [];
+    // addSelectedCategorie(selection) {
+    //   this.selectedCategories = selection;
+    // },
+    // storeSheetsWithCategories(sheetsWithCategory) {
+    //   let categories = [];
 
-      sheetsWithCategory.forEach((sheet) => {
-        if (!categories.includes(sheet.category))
-          categories.push(sheet.category);
-      });
-      const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
-      this.categories = sortedCategories;
-    },
+    //   sheetsWithCategory.forEach((sheet) => {
+    //     if (!categories.includes(sheet.category))
+    //       categories.push(sheet.category);
+    //   });
+    //   const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
+    //   this.categories = sortedCategories;
+    // },
   },
 
   getters: {
@@ -92,18 +92,18 @@ export const usePostsStore = defineStore("posts", {
     getFilter(state) {
       return state.filter;
     },
-    getSheetsWithCategories(state) {
-      return state.sheets.filter((sheet) => {
-        if (sheet.category) return sheet.category;
-      });
-    },
-    getCategories(state) {
-      const sheetsWithCategory = this.getSheetsWithCategories;
-      this.storeSheetsWithCategories(sheetsWithCategory);
-      return state.categories;
-    },
-    getSelectedCategories(state) {
-      return state.selectedCategories;
-    },
+    // getSheetsWithCategories(state) {
+    //   return state.sheets.filter((sheet) => {
+    //     if (sheet.category) return sheet.category;
+    //   });
+    // },
+    // getCategories(state) {
+    //   const sheetsWithCategory = this.getSheetsWithCategories;
+    //   this.storeSheetsWithCategories(sheetsWithCategory);
+    //   return state.categories;
+    // },
+    // getSelectedCategories(state) {
+    //   return state.selectedCategories;
+    // },
   },
 });
