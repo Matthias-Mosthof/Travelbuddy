@@ -6,6 +6,9 @@ declare global {
   export interface NewPost {
     title: string;
     text: string;
+    name: string;
+    age: number;
+    gender: "männlich" | "weiblich" | "divers";
     email: string;
   }
 
