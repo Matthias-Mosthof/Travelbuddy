@@ -3,7 +3,7 @@ definePageMeta({
   layout: "default",
 });
 
-const store = useCheatSheetStore();
+const store = usePostsStore();
 const { fetchFirebaseDB } = store;
 
 onMounted(() => {
@@ -12,7 +12,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <CategorieComp />
-  <AllSheets />
-  <AddSheet />
+  <AllPosts />
+  <AddPost />
 </template>

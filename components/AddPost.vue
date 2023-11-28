@@ -3,7 +3,7 @@
     <q-btn
       fab
       icon="add"
-      label="Add new Sheet"
+      label="Add new Post"
       color="primary"
       @click="toggleCard = true"
     />
@@ -13,7 +13,7 @@
     <div>
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
-          v-model="sheetTitle"
+          v-model="postTitle"
           bg-color="indigo-2"
           type="text"
           label="Title (optional)"
@@ -21,19 +21,19 @@
         />
         <q-input
           filled
-          v-model="sheetText"
+          v-model="postText"
           type="textarea"
           label="Deine Beschreibung"
-          ref="newSheet"
+          ref="newPost"
           :rules="inputRule"
         />
-        <q-input
+        <!-- <q-input
           filled
           v-model="sheetCategory"
           type="text"
           label="Kategorie (optional)"
           ref="newSheet"
-        />
+        /> -->
         <q-btn color="primary" icon="check" label="Fire" type="submit" />
       </q-form>
     </div>
@@ -43,32 +43,29 @@
 <script setup lang="ts">
 const toggleCard = ref(false);
 
-const store = useCheatSheetStore();
+const postsStore = usePostsStore();
+const { addPost } = postsStore;
 
-const { addSheet } = store;
-
-const newSheet = ref();
-const sheetTitle = ref();
-const sheetText = ref();
-const sheetCategory = ref();
+const newPost = ref();
+const postTitle = ref();
+const postText = ref();
+// const postCategory = ref();
 
 const inputRule = computed(() => [
-  (val) => (val && val.length > 0) || val === null || "Bitte schreibe etwas",
+  (val: string) =>
+    (val && val.length > 0) || val === null || "Bitte schreibe etwas",
 ]);
 
 function onSubmit() {
-  const newSheet = {};
-  if (sheetText.value) newSheet.text = sheetText.value;
-  if (sheetTitle.value) newSheet.title = sheetTitle.value;
-  newSheet.category = sheetCategory.value || "";
-  addSheet(newSheet);
+  addPost(postTitle.value, postText.value);
+  // newSheet.category = postCategory.value || "";
   onReset();
   toggleCard.value = false;
 }
 
 function onReset() {
-  sheetText.value = null;
-  sheetTitle.value = null;
-  newSheet.value.focus();
+  postTitle.value = null;
+  postTitle.value = null;
+  newPost.value.focus();
 }
 </script>
