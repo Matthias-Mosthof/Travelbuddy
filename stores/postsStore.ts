@@ -32,6 +32,7 @@ export const usePostsStore = defineStore("posts", {
         await updateDoc(postRef, {
           createdAt: serverTimestamp(),
         });
+
         Notify.create({
           message: "Post added succesfully!",
           type: "positive",
@@ -42,11 +43,12 @@ export const usePostsStore = defineStore("posts", {
           type: "negative",
         });
       }
+
       this.fetchFirebaseDB();
     },
 
     async fetchFirebaseDB() {
-      let dbPosts = await getDocs(collection(db, "sheets"));
+      let dbPosts = await getDocs(collection(db, "posts"));
       const posts = [] as Post[];
 
       dbPosts.forEach((doc) => {
