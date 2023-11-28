@@ -3,7 +3,7 @@
     <q-btn
       fab
       icon="add"
-      label="Add new Sheet"
+      label="Add new Post"
       color="primary"
       @click="toggleCard = true"
     />
@@ -49,23 +49,23 @@ const { addPost } = postsStore;
 const newPost = ref();
 const postTitle = ref();
 const postText = ref();
-const postCategory = ref();
+// const postCategory = ref();
 
 const inputRule = computed(() => [
-  (val) => (val && val.length > 0) || val === null || "Bitte schreibe etwas",
+  (val: string) =>
+    (val && val.length > 0) || val === null || "Bitte schreibe etwas",
 ]);
 
 function onSubmit() {
   addPost(postTitle.value, postText.value);
-  newSheet.category = postCategory.value || "";
-  addSheet(newSheet);
+  // newSheet.category = postCategory.value || "";
   onReset();
   toggleCard.value = false;
 }
 
 function onReset() {
-  sheetText.value = null;
-  sheetTitle.value = null;
+  postTitle.value = null;
+  postTitle.value = null;
   newPost.value.focus();
 }
 </script>

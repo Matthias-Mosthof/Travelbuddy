@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="q-pa-md">
     <div class="q-gutter-sm">
       <q-radio
@@ -15,10 +15,11 @@
 
 <script setup lang="ts">
 const selection = ref([]);
-const store = useCheatSheetStore();
+const store = usePostsStore();
 const categories = computed(() => store?.getCategories);
 
 function addSelection() {
   store.addSelectedCategorie(selection.value);
 }
-</script>
+</script> -->
+<template></template>

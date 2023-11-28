@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const store = useCheatSheetStore();
+const store = usePostsStore();
 
 defineProps({
   placeholder: {
