@@ -11,29 +11,34 @@ import {
 import { Notify } from "quasar";
 
 const sheetsRef = collection(db, "sheets");
-export const useCheatSheetStore = defineStore("cheatSheets", {
+
+export const usePostsStore = defineStore("posts", {
   state: () => ({
-    sheets: [],
+    posts: [] as Post[],
     filter: "",
     categories: [],
     selectedCategories: [],
   }),
 
   actions: {
-    async addSheet(userInput) {
+    async addPost(title: string, text: string) {
       try {
         // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        const sheetRef = await addDoc(collection(db, "sheets"), userInput);
+        const newPost: Post = { title, text };
+
+        // this.posts.push(newPost);
+
+        const sheetRef = await addDoc(collection(db, "sheets"), newPost);
         await updateDoc(sheetRef, {
           createdAt: serverTimestamp(),
         });
         Notify.create({
-          message: "Sheet added succesfully!",
+          message: "Post added succesfully!",
           type: "positive",
         });
       } catch (error) {
         Notify.create({
-          message: "Error adding sheet: " + error.message,
+          message: "Error adding post: " + error.message,
           type: "negative",
         });
       }
@@ -41,19 +46,21 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
     },
 
     async fetchFirebaseDB() {
-      let data = await getDocs(collection(db, "sheets"));
-      const firebaseSheets = [];
-      data.forEach((doc) => {
-        let sheet = {
+      let dbPosts = await getDocs(collection(db, "sheets"));
+      const posts = [] as Post[];
+
+      dbPosts.forEach((doc) => {
+        let post = {
           id: doc.id,
           ...doc.data(),
-        };
-        firebaseSheets.push(sheet);
+        } as Post;
+
+        posts.push(post);
       });
-      this.sheets = firebaseSheets;
+      this.posts = posts;
     },
 
-    async removeSheet(id) {
+    async removePost(id) {
       try {
         await deleteDoc(doc(sheetsRef, id));
         this.fetchFirebaseDB();
@@ -79,8 +86,8 @@ export const useCheatSheetStore = defineStore("cheatSheets", {
   },
 
   getters: {
-    getCheatSheets(state) {
-      return state.sheets;
+    getPosts(state) {
+      return state.posts;
     },
     getFilter(state) {
       return state.filter;
