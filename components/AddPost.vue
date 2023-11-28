@@ -16,8 +16,9 @@
           v-model="postTitle"
           bg-color="indigo-2"
           type="text"
-          label="Title (optional)"
+          label="Überschrift"
           filled
+          required
         />
         <q-input
           filled
@@ -26,6 +27,16 @@
           label="Deine Beschreibung"
           ref="newPost"
           :rules="inputRule"
+          required
+        />
+        <q-input
+          filled
+          v-model="postEmail"
+          type="email"
+          label="Deine E-Mail"
+          ref="newPost"
+          :rules="inputRule"
+          required
         />
         <!-- <q-input
           filled
@@ -47,8 +58,11 @@ const postsStore = usePostsStore();
 const { addPost } = postsStore;
 
 const newPost = ref();
+
 const postTitle = ref();
 const postText = ref();
+const postEmail = ref();
+
 // const postCategory = ref();
 
 const inputRule = computed(() => [
