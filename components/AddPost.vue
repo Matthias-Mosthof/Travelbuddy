@@ -31,6 +31,35 @@
           standout="bg-green-4 text-white"
           required
         />
+
+        <q-input
+          class="rounded-borders bg-green-3"
+          filled
+          v-model="postName"
+          type="text"
+          label="Dein Vorname"
+          ref="newPost"
+          standout="bg-green-4 text-white"
+          required
+        />
+        <q-input
+          class="rounded-borders bg-green-3"
+          filled
+          v-model="postAge"
+          type="number"
+          label="Dein Alter"
+          ref="newPost"
+          standout="bg-green-4 text-white"
+          required
+        />
+        <q-select
+          class="rounded-borders bg-green-3"
+          v-model="postGender"
+          :options="genderOptions"
+          label="Geschlecht"
+          filled
+          standout="bg-green-4 text-white"
+        />
         <q-input
           class="rounded-borders bg-green-3"
           filled
@@ -74,11 +103,15 @@ const { addPost } = postsStore;
 
 const newPost = ref();
 
-const postTitle = ref();
-const postText = ref();
-const postEmail = ref();
-
+const postTitle = ref("");
+const postText = ref("");
+const postEmail = ref("");
+const postAge = ref("");
+const postGender = ref("");
+const postName = ref("");
 // const postCategory = ref();
+
+const genderOptions = ref(["männlich", "weiblich", "divers"]);
 
 const inputRule = computed(() => [
   (val: string) =>
@@ -93,8 +126,12 @@ function onSubmit() {
 }
 
 function onReset() {
-  postTitle.value = null;
-  postTitle.value = null;
+  postTitle.value = "";
+  postText.value = "";
+  postEmail.value = "";
+  postAge.value = "";
+  postGender.value = "";
+  postName.value = "";
   newPost.value.focus();
 }
 </script>
