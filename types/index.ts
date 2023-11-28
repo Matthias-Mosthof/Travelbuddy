@@ -2,7 +2,8 @@ export {};
 
 declare global {
   export interface Post {
-    postTitle: string;
-    postText: string;
+    title: string;
+    text: string;
+    id: string;
   }
 }
