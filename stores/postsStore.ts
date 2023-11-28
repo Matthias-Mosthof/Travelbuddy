@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { Notify } from "quasar";
 
-const sheetsRef = collection(db, "sheets");
+const postsRef = collection(db, "posts");
 
 export const usePostsStore = defineStore("posts", {
   state: () => ({
@@ -28,8 +28,8 @@ export const usePostsStore = defineStore("posts", {
 
         // this.posts.push(newPost);
 
-        const sheetRef = await addDoc(collection(db, "sheets"), newPost);
-        await updateDoc(sheetRef, {
+        const postRef = await addDoc(collection(db, "posts"), newPost);
+        await updateDoc(postRef, {
           createdAt: serverTimestamp(),
         });
         Notify.create({
