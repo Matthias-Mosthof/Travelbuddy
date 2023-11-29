@@ -102,16 +102,25 @@ const postsStore = usePostsStore();
 const { addPost } = postsStore;
 
 const newPost = ref();
+const genderOptions = ref(["männlich", "weiblich", "divers"]);
 
 const postTitle = ref("");
 const postText = ref("");
 const postEmail = ref("");
-const postAge = ref("");
+const postAge = ref(0);
 const postGender = ref("");
 const postName = ref("");
 // const postCategory = ref();
-
-const genderOptions = ref(["männlich", "weiblich", "divers"]);
+const userInput = computed((): NewPost => {
+  return {
+    title: postTitle.value,
+    text: postText.value,
+    name: postName.value,
+    age: postAge.value,
+    gender: postGender.value,
+    email: postEmail.value,
+  };
+});
 
 const inputRule = computed(() => [
   (val: string) =>
@@ -119,7 +128,7 @@ const inputRule = computed(() => [
 ]);
 
 function onSubmit() {
-  addPost(postTitle.value, postText.value);
+  addPost(userInput.value as NewPost);
   // newSheet.category = postCategory.value || "";
   onReset();
   toggleCard.value = false;
@@ -129,7 +138,7 @@ function onReset() {
   postTitle.value = "";
   postText.value = "";
   postEmail.value = "";
-  postAge.value = "";
+  postAge.value = 0;
   postGender.value = "";
   postName.value = "";
   newPost.value.focus();
