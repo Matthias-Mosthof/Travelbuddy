@@ -8,7 +8,7 @@ declare global {
     text: string;
     name: string;
     age: number;
-    gender: "männlich" | "weiblich" | "divers";
+    gender: string | "männlich" | "weiblich" | "divers";
     email: string;
   }
 
