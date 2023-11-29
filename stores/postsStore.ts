@@ -21,11 +21,9 @@ export const usePostsStore = defineStore("posts", {
   }),
 
   actions: {
-    async addPost(title: string, text: string) {
+    async addPost(newPost: NewPost) {
       try {
         // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        const newPost: NewPost = { title, text };
-
         // this.posts.push(newPost);
 
         const postRef = await addDoc(collection(db, "posts"), newPost);

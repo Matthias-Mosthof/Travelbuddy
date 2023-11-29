@@ -48,6 +48,11 @@
         <q-card-section>
           {{ post.text }}
         </q-card-section>
+
+        <q-card-section> Name: {{ post.name }} </q-card-section>
+        <q-card-section> Alter: {{ post.age }} </q-card-section>
+        <q-card-section> Geschlecht: {{ post.gender }} </q-card-section>
+
         <!-- TODO: Use JS Date Entry for every new sheet instead of firebase timestamp to consume it more conviently -->
         <div class="text-subtitle3 text-grey-6 q-pl-md">
           Created at
