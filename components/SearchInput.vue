@@ -2,10 +2,10 @@
 const store = usePostsStore();
 
 defineProps({
-  placeholder: {
-    type: String,
-    required: true,
-  },
+	placeholder: {
+		type: String,
+		required: true,
+	},
 });
 </script>
 

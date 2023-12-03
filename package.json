@@ -7,35 +7,38 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "npx eslint --fix ."
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "eslint": "^8.54.0",
+    "eslint-plugin-vue": "^9.19.2",
     "nuxt": "^3.8.1",
+    "nuxt-quasar-ui": "^2.0.6",
     "vue": "^3.3.8",
-    "vue-router": "^4.2.5",
-    "nuxt-quasar-ui": "^2.0.6"
+    "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "@quasar/extras": "^1.16.8",
     "autoprefixer": "^10.4.2",
     "axios": "^1.2.1",
     "cypress": "^12.17.4",
     "dotenv": "^16.3.1",
-    "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-cypress": "^2.14.0",
-    "eslint-plugin-vue": "^9.0.0",
     "firebase": "^10.4.0",
     "loadash": "^1.0.0",
     "pinia": "^2.1.6",
-    "@pinia/nuxt": "^0.5.1",
     "postcss": "^8.4.14",
     "prettier": "^2.5.1",
     "quasar": "^2.14.0",
     "svgo": "^3.0.2",
-    "underscore": "^1.13.6",
-    "@quasar/extras": "^1.16.8"
+    "underscore": "^1.13.6"
   },
   "engines": {
     "node": "^20 || ^18 || ^16 || ^14.19",

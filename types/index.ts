@@ -1,4 +1,4 @@
-import type { Timestamp } from "firebase/firestore";
+import type { Timestamp } from 'firebase/firestore';
 
 export {};
 
@@ -8,7 +8,7 @@ declare global {
     text: string;
     name: string;
     age: number;
-    gender: string | "männlich" | "weiblich" | "divers";
+    gender: string | 'männlich' | 'weiblich' | 'divers';
     email: string;
   }
 

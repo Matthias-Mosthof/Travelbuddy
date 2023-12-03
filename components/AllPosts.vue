@@ -78,15 +78,15 @@ const filter = computed(() => store.getFilter);
 // const selectedCategories = computed(() => store.getSelectedCategories);
 
 const filteredPosts = computed(() => {
-  return state.value.filter((post) => {
-    return (
-      post.text?.includes(filter.value) || post.title?.includes(filter.value)
-    );
-  });
+	return state.value.filter((post) => {
+		return (
+			post.text?.includes(filter.value) || post.title?.includes(filter.value)
+		);
+	});
 });
 
 function triggerRemove(post: Post) {
-  removePost(post.id);
+	removePost(post.id);
 }
 </script>
 
