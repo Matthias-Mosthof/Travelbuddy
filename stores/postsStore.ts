@@ -1,14 +1,14 @@
-import { defineStore } from 'pinia';
 import {
+	addDoc,
+	collection,
 	deleteDoc,
 	doc,
-	collection,
-	addDoc,
 	getDocs,
 	serverTimestamp,
 	updateDoc,
 } from 'firebase/firestore';
 import { Notify } from 'quasar';
+import { defineStore } from 'pinia';
 
 const postsRef = collection(db, 'posts');
 
