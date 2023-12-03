@@ -31,7 +31,13 @@ module.exports = {
 		semi: ['error', 'always'],
 		'vue/multi-word-component-names': ['error', {
 			'ignores': ['index', 'default']
-		  }]
-	},
-	
+		  }],
+		  'sort-imports': ['error', {
+			'ignoreCase': false,
+			'ignoreDeclarationSort': false,
+			'ignoreMemberSort': false,
+			'memberSyntaxSortOrder': ['none', 'all', 'multiple', 'single'],
+			'allowSeparatedGroups': false
+		}]
+	},	
 };
