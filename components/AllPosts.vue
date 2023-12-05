@@ -1,19 +1,37 @@
+<script setup lang="ts">
+const store = usePostsStore();
+const { removePost } = store;
+
+const state = computed(() => store.getPosts);
+
+const filter = computed(() => store.getFilter);
+// const selectedCategories = computed(() => store.getSelectedCategories);
+
+const filteredPosts = computed(() => state.value.filter((post) => (
+  post.text?.includes(filter.value) || post.title?.includes(filter.value)
+)));
+
+function triggerRemove(post: Post) {
+  removePost(post.id);
+}
+</script>
+
 <template>
   <div class="q-pa-md">
     <TransitionGroup
-      tag="div"
       appear
+      class="row q-gutter-md"
       enter-active-class="animated fadeIn"
       enter-leave-class="animated fadeOut"
-      class="row q-gutter-md"
+      tag="div"
     >
       <q-card
         v-for="(post, i) in filteredPosts"
         :key="i"
-        dark
-        flat
         bordered
         class="my-card q-pa-md"
+        dark
+        flat
       >
         <q-card-section>
           <div class="row items-center no-wrap">
@@ -24,18 +42,29 @@
             </div>
 
             <div class="col-auto">
-              <q-btn color="grey-7" round flat icon="more_vert">
-                <q-menu cover auto-close>
+              <q-btn
+                color="grey-7"
+                flat
+                icon="more_vert"
+                round
+              >
+                <q-menu
+                  auto-close
+                  cover
+                >
                   <q-list>
                     <q-item
+                      v-close-popup
                       clickable
                       @click="triggerRemove(post)"
-                      v-close-popup
                     >
                       <q-item-section>Remove Card</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable v-close-popup>
+                    <q-item
+                      v-close-popup
+                      clickable
+                    >
                       <q-item-section>Edit Card</q-item-section>
                     </q-item>
                   </q-list>
@@ -58,8 +87,8 @@
           Created at
           {{
             post.createdAt.toDate().toDateString() +
-            ", " +
-            post.createdAt.toDate().toLocaleTimeString("de-DE")
+              ", " +
+              post.createdAt.toDate().toLocaleTimeString("de-DE")
           }}
         </div>
         <!-- <div>{{ post.category }}</div> -->
@@ -67,28 +96,6 @@
     </TransitionGroup>
   </div>
 </template>
-
-<script setup lang="ts">
-const store = usePostsStore();
-const { removePost } = store;
-
-const state = computed(() => store.getPosts);
-
-const filter = computed(() => store.getFilter);
-// const selectedCategories = computed(() => store.getSelectedCategories);
-
-const filteredPosts = computed(() => {
-	return state.value.filter((post) => {
-		return (
-			post.text?.includes(filter.value) || post.title?.includes(filter.value)
-		);
-	});
-});
-
-function triggerRemove(post: Post) {
-	removePost(post.id);
-}
-</script>
 
 <style scoped>
 .my-card {
