@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const toggleCard = ref(false);
 
+const toggleCard = ref(false);
 const postsStore = usePostsStore();
 const { addPost } = postsStore;
 
@@ -14,111 +14,119 @@ const postAge = ref(0);
 const postGender = ref('');
 const postName = ref('');
 // const postCategory = ref();
-const userInput = computed((): NewPost => {
-	return {
-		title: postTitle.value,
-		text: postText.value,
-		name: postName.value,
-		age: postAge.value,
-		gender: postGender.value,
-		email: postEmail.value,
-	};
-});
+const userInput = computed((): NewPost => ({
+  title: postTitle.value,
+  text: postText.value,
+  name: postName.value,
+  age: postAge.value,
+  gender: postGender.value,
+  email: postEmail.value,
+}));
 
 const inputRule = computed(() => [
-	(val: string) =>
-		(val && val.length > 0) || val === null || 'Bitte schreibe etwas',
+  (val: string) => (val && val.length > 0) || val === null || 'Bitte schreibe etwas',
 ]);
 
-function onSubmit() {
-	addPost(userInput.value as NewPost);
-	// newSheet.category = postCategory.value || "";
-	onReset();
-	toggleCard.value = false;
+function onReset() {
+  postTitle.value = '';
+  postText.value = '';
+  postEmail.value = '';
+  postAge.value = 0;
+  postGender.value = '';
+  postName.value = '';
+  newPost.value.focus();
 }
 
-function onReset() {
-	postTitle.value = '';
-	postText.value = '';
-	postEmail.value = '';
-	postAge.value = 0;
-	postGender.value = '';
-	postName.value = '';
-	newPost.value.focus();
+function onSubmit() {
+  addPost(userInput.value as NewPost);
+  // newSheet.category = postCategory.value || "";
+  onReset();
+  toggleCard.value = false;
 }
+
 </script>
 
 <template>
-  <q-page-sticky position="bottom-right" :offset="[18, 18]">
+  <q-page-sticky
+    :offset="[18, 18]"
+    position="bottom-right"
+  >
     <q-btn
+      color="primary"
       fab
       icon="add"
       label="Add new Post"
-      color="primary"
       @click="toggleCard = true"
     />
   </q-page-sticky>
 
-  <q-dialog v-model="toggleCard" persistent>
+  <q-dialog
+    v-model="toggleCard"
+    persistent
+  >
     <div>
-      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+      <q-form
+        class="q-gutter-md"
+        @reset="onReset"
+        @submit="onSubmit"
+      >
         <q-input
-          class="rounded-borders bg-green-3"
           v-model="postTitle"
-          type="text"
-          label="Überschrift"
+          class="rounded-borders bg-green-3"
           filled
+          label="Überschrift"
           required
           standout="bg-green-4 text-white"
+          type="text"
         />
         <q-input
+          ref="newPost"
+          v-model="postText"
           class="rounded-borders bg-green-3"
           filled
-          v-model="postText"
-          type="textarea"
           label="Deine Beschreibung"
-          ref="newPost"
-          standout="bg-green-4 text-white"
           required
+          standout="bg-green-4 text-white"
+          type="textarea"
         />
 
         <q-input
+          ref="newPost"
+          v-model="postName"
           class="rounded-borders bg-green-3"
           filled
-          v-model="postName"
-          type="text"
           label="Dein Vorname"
-          ref="newPost"
-          standout="bg-green-4 text-white"
           required
+          standout="bg-green-4 text-white"
+          type="text"
         />
         <q-input
+          ref="newPost"
+          v-model="postAge"
           class="rounded-borders bg-green-3"
           filled
-          v-model="postAge"
-          type="number"
           label="Dein Alter"
-          ref="newPost"
-          standout="bg-green-4 text-white"
           required
+          standout="bg-green-4 text-white"
+          type="number"
         />
         <q-select
-          class="rounded-borders bg-green-3"
           v-model="postGender"
-          :options="genderOptions"
-          label="Geschlecht"
+          class="rounded-borders bg-green-3"
           filled
+          label="Geschlecht"
+          :options="genderOptions"
           standout="bg-green-4 text-white"
         />
         <q-input
+          ref="newPost"
+          v-model="postEmail"
           class="rounded-borders bg-green-3"
           filled
-          v-model="postEmail"
-          type="email"
           label="Deine E-Mail (wird nicht veröffentlicht)"
-          ref="newPost"
           required
           standout="bg-green-4 text-white"
+          type="email"
         />
         <!-- <q-input
           filled
@@ -134,11 +142,11 @@ function onReset() {
           type="submit"
         />
         <q-btn
+          v-close-popup
           color="secondary"
           icon="cancel"
           label="Abbrechen"
           type="cancel"
-          v-close-popup
         />
       </q-form>
     </div>

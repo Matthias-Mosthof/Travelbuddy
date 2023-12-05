@@ -2,23 +2,23 @@
 const store = usePostsStore();
 
 defineProps({
-	placeholder: {
-		type: String,
-		required: true,
-	},
+  placeholder: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
 <template>
   <q-input
-    filled
     v-model="store.filter"
-    type="search"
-    debounce="100"
-    :placeholder="placeholder"
     bg-color="info"
+    debounce="100"
+    filled
+    :placeholder="placeholder"
+    type="search"
   >
-    <template v-slot:append>
+    <template #append>
       <q-icon name="search" />
     </template>
   </q-input>

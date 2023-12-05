@@ -1,13 +1,16 @@
 <template>
   <q-layout
-    view="hhr lpr ffr"
+    class="shadow-2 rounded-borders"
     container
     style="height: 100vh"
-    class="shadow-2 rounded-borders"
+    view="hhr lpr ffr"
   >
     <NavBars />
     <q-page-container>
-      <q-page class="q-pa-md" padding>
+      <q-page
+        class="q-pa-md"
+        padding
+      >
         <slot />
       </q-page>
     </q-page-container>
