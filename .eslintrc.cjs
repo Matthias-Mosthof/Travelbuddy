@@ -23,8 +23,10 @@ module.exports = {
 		parser: '@typescript-eslint/parser',
 		sourceType: 'module',
 	},
-	plugins: ['@typescript-eslint', 'vue'],
+	plugins: ['@typescript-eslint', 'vue', 'simple-import-sort'],
 	rules: {
+		'simple-import-sort/imports': 'error',
+		'simple-import-sort/exports': 'error',
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
@@ -33,16 +35,6 @@ module.exports = {
 			'error',
 			{
 				ignores: ['index', 'default'],
-			},
-		],
-		'sort-imports': [
-			'error',
-			{
-				ignoreCase: false,
-				ignoreDeclarationSort: false,
-				ignoreMemberSort: false,
-				memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-				allowSeparatedGroups: false,
 			},
 		],
 		'vue/block-order': [

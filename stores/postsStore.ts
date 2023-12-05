@@ -7,8 +7,8 @@ import {
 	serverTimestamp,
 	updateDoc,
 } from 'firebase/firestore';
-import { Notify } from 'quasar';
 import { defineStore } from 'pinia';
+import { Notify } from 'quasar';
 
 const postsRef = collection(db, 'posts');
 
