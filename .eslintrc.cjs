@@ -29,15 +29,27 @@ module.exports = {
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
-		'vue/multi-word-component-names': ['error', {
-			'ignores': ['index', 'default']
-		  }],
-		  'sort-imports': ['error', {
-			'ignoreCase': false,
-			'ignoreDeclarationSort': false,
-			'ignoreMemberSort': false,
-			'memberSyntaxSortOrder': ['none', 'all', 'multiple', 'single'],
-			'allowSeparatedGroups': false
-		}]
-	},	
+		'vue/multi-word-component-names': [
+			'error',
+			{
+				ignores: ['index', 'default'],
+			},
+		],
+		'sort-imports': [
+			'error',
+			{
+				ignoreCase: false,
+				ignoreDeclarationSort: false,
+				ignoreMemberSort: false,
+				memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+				allowSeparatedGroups: false,
+			},
+		],
+		'vue/block-order': [
+			'error',
+			{
+				order: ['script', 'template', 'style'],
+			},
+		],
+	},
 };

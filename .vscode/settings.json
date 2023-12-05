@@ -1,3 +1,4 @@
 {
-  "editor.fontFamily": "monofur for Powerline"
+  "editor.fontFamily": "monofur for Powerline",
+  "eslint.format.enable": true
 }

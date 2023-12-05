@@ -1,3 +1,25 @@
+<script setup lang="ts">
+const store = usePostsStore();
+const { removePost } = store;
+
+const state = computed(() => store.getPosts);
+
+const filter = computed(() => store.getFilter);
+// const selectedCategories = computed(() => store.getSelectedCategories);
+
+const filteredPosts = computed(() => {
+	return state.value.filter((post) => {
+		return (
+			post.text?.includes(filter.value) || post.title?.includes(filter.value)
+		);
+	});
+});
+
+function triggerRemove(post: Post) {
+	removePost(post.id);
+}
+</script>
+
 <template>
   <div class="q-pa-md">
     <TransitionGroup
@@ -67,28 +89,6 @@
     </TransitionGroup>
   </div>
 </template>
-
-<script setup lang="ts">
-const store = usePostsStore();
-const { removePost } = store;
-
-const state = computed(() => store.getPosts);
-
-const filter = computed(() => store.getFilter);
-// const selectedCategories = computed(() => store.getSelectedCategories);
-
-const filteredPosts = computed(() => {
-	return state.value.filter((post) => {
-		return (
-			post.text?.includes(filter.value) || post.title?.includes(filter.value)
-		);
-	});
-});
-
-function triggerRemove(post: Post) {
-	removePost(post.id);
-}
-</script>
 
 <style scoped>
 .my-card {
