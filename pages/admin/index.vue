@@ -1,11 +1,20 @@
 <script setup lang="ts">
 definePageMeta({
-layout: 'admin',
+  layout: 'admin',
+});
+
+const store = usePostsStore();
+const { fetchFirebaseDB } = store;
+
+onMounted(() => {
+  fetchFirebaseDB();
 });
 
 </script>
 
-
 <template>
-    hier admin
+  <div>
+    <PostsList :is-admin="true" />
+    <PostAdd />
+  </div>
 </template>
