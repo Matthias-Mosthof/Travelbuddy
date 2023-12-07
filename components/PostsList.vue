@@ -1,4 +1,12 @@
 <script setup lang="ts">
+
+defineProps({
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const store = usePostsStore();
 const { removePost } = store;
 
@@ -7,7 +15,7 @@ const state = computed(() => store.getPosts);
 const filter = computed(() => store.getFilter);
 // const selectedCategories = computed(() => store.getSelectedCategories);
 
-const filteredPosts = computed(() => state.value.filter((post) => (
+const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => (
   post.text?.includes(filter.value) || post.title?.includes(filter.value)
 )));
 
@@ -26,8 +34,8 @@ function triggerRemove(post: Post) {
       tag="div"
     >
       <q-card
-        v-for="(post, i) in filteredPosts"
-        :key="i"
+        v-for="post in filteredPosts"
+        :key="post.id"
         bordered
         class="my-card q-pa-md"
         dark
@@ -41,8 +49,11 @@ function triggerRemove(post: Post) {
               </div>
             </div>
 
-            <div class="col-auto">
+            <div
+              class="col-auto"
+            >
               <q-btn
+                v-if="isAdmin"
                 color="grey-7"
                 flat
                 icon="more_vert"
