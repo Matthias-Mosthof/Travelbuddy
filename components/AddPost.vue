@@ -21,6 +21,8 @@ const userInput = computed((): NewPost => ({
   age: postAge.value,
   gender: postGender.value,
   email: postEmail.value,
+  released: false,
+  rejected: false,
 }));
 
 const inputRule = computed(() => [
