@@ -8,7 +8,6 @@ defineProps({
 });
 
 const store = usePostsStore();
-const { removePost } = store;
 
 const state = computed(() => store.getPosts);
 
@@ -19,9 +18,6 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
   post.text?.includes(filter.value) || post.title?.includes(filter.value)
 )));
 
-function triggerRemove(post: Post) {
-  removePost(post.id);
-}
 </script>
 
 <template>
@@ -67,7 +63,7 @@ function triggerRemove(post: Post) {
                     <q-item
                       v-close-popup
                       clickable
-                      @click="triggerRemove(post)"
+                      @click="usePostsStore().removePost(post.id)"
                     >
                       <q-item-section>Remove Card</q-item-section>
                     </q-item>
