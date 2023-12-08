@@ -4,10 +4,10 @@ definePageMeta({
 });
 
 const store = usePostsStore();
-const { fetchFirebaseDB } = store;
+const { fetchSupabasePosts } = store;
 
 onMounted(() => {
-  fetchFirebaseDB();
+  fetchSupabasePosts();
 });
 
 </script>
