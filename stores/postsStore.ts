@@ -47,33 +47,17 @@ export const usePostsStore = defineStore('posts', {
       });
 
       this.posts = posts.value as unknown as Post[];
-      console.log(this.posts);
     },
 
     async removePost(id: string) {
-
-      //   try {
-      //     await deleteDoc(doc(postsRef, id));
-      //     this.fetchFirebaseDB();
-      //     console.log(`successfully deleted document with id ${id}`);
-      //   } catch (error) {
-      //     console.log(`error: ${error}`);
-      //   }
-      // },
-
-      // addSelectedCategorie(selection) {
-      //   this.selectedCategories = selection;
-      // },
-      // storeSheetsWithCategories(sheetsWithCategory) {
-      //   let categories = [];
-
-    //   sheetsWithCategory.forEach((sheet) => {
-    //     if (!categories.includes(sheet.category))
-    //       categories.push(sheet.category);
-    //   });
-    //   const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
-    //   this.categories = sortedCategories;
-    // },
+      const client = await useSupabaseClient<Database>();
+      try {
+        await client.from('posts').delete().match({ id });
+        this.posts = this.posts.filter((post: Post) => post.id !== id);
+        console.log(`successfully deleted document with id ${id}`);
+      } catch (error) {
+        console.log(`error: ${error}`);
+      }
     },
   },
 
