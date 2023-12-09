@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Dialog } from 'quasar';
 
 defineProps({
   isAdmin: {
@@ -17,22 +16,6 @@ const filter = computed(() => store.getFilter);
 const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => (
   post.text?.includes(filter.value) || post.title?.includes(filter.value)
 )));
-
-function showMessageModal(name: string) {
-  Dialog.create({
-    title: 'Nachricht',
-    message: `Deine Nachricht an ${name}`,
-    prompt: {
-      model: '',
-      isValid: (val) => val.length > 2,
-      type: 'textarea',
-    },
-    cancel: true,
-    persistent: true,
-  }).onOk((data) => {
-    console.log(data);
-  });
-}
 
 </script>
 
@@ -111,13 +94,9 @@ function showMessageModal(name: string) {
             post.created_at
           }}
         </div>
-        <q-btn
-          class="q-ma-sm"
-          color="primary"
-          dense
-          icon="message"
-          label="Nachricht senden"
-          @click="showMessageModal(post.name)"
+        <MessageDialog
+          :email="post.email"
+          :name="post.name"
         />
       </q-card>
     </TransitionGroup>
