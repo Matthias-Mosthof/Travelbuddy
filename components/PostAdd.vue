@@ -25,10 +25,6 @@ const userInput = computed((): NewPost => ({
   rejected: false,
 }));
 
-const inputRule = computed(() => [
-  (val: string) => (val && val.length > 0) || val === null || 'Bitte schreibe etwas',
-]);
-
 function onReset() {
   postTitle.value = '';
   postText.value = '';
