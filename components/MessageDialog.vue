@@ -14,8 +14,8 @@ const showMessageModal = ref(false);
 const messageContent = ref('');
 const messageEmail = ref('');
 
-function onSubmit() {
-  console.log('submitted');
+function sendMail(email: string) {
+  console.log(email);
   showMessageModal.value = false;
 }
 
@@ -42,7 +42,7 @@ function onReset() {
       <q-form
         class="q-gutter-md"
         @reset="onReset"
-        @submit="onSubmit"
+        @submit="sendMail(email)"
       >
         <q-input
           v-model="messageContent"
