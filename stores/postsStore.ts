@@ -15,16 +15,23 @@ export const usePostsStore = defineStore('posts', {
   }),
 
   actions: {
+
+    async fetchSupabasePosts() {
+      const client = await useSupabaseClient<Database>();
+      const { data: posts } = await useAsyncData('posts', async () => {
+        const { data } = await client.from('posts').select('*');
+        return data;
+      });
+
+      this.posts = posts.value as unknown as Post[];
+    },
+
     async addPost(newPost: NewPost) {
+      const client = await useSupabaseClient<Database>();
       try {
-        // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        // this.posts.push(newPost);
+        const { data } = await client.from('posts').insert(newPost).select();
 
-        const postRef = await addDoc(collection(db, 'posts'), newPost);
-        await updateDoc(postRef, {
-          createdAt: serverTimestamp(),
-        });
-
+        this.posts.push(data![0] as Post);
         Notify.create({
           message: 'Post added succesfully!',
           type: 'positive',
@@ -35,45 +42,17 @@ export const usePostsStore = defineStore('posts', {
           type: 'negative',
         });
       }
-
-      this.fetchSupabasePosts();
-    },
-
-    async fetchSupabasePosts() {
-      const client = await useSupabaseClient<Database>();
-      const { data: posts } = await useAsyncData('posts', async () => {
-        const { data } = await client.from('posts').select('*');
-        return data;
-      });
-
-      this.posts = posts.value as unknown as Post[];
-      console.log(this.posts);
     },
 
     async removePost(id: string) {
-
-      //   try {
-      //     await deleteDoc(doc(postsRef, id));
-      //     this.fetchFirebaseDB();
-      //     console.log(`successfully deleted document with id ${id}`);
-      //   } catch (error) {
-      //     console.log(`error: ${error}`);
-      //   }
-      // },
-
-      // addSelectedCategorie(selection) {
-      //   this.selectedCategories = selection;
-      // },
-      // storeSheetsWithCategories(sheetsWithCategory) {
-      //   let categories = [];
-
-    //   sheetsWithCategory.forEach((sheet) => {
-    //     if (!categories.includes(sheet.category))
-    //       categories.push(sheet.category);
-    //   });
-    //   const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
-    //   this.categories = sortedCategories;
-    // },
+      const client = await useSupabaseClient<Database>();
+      try {
+        await client.from('posts').delete().match({ id });
+        this.posts = this.posts.filter((post: Post) => post.id !== id);
+        console.log(`successfully deleted document with id ${id}`);
+      } catch (error) {
+        console.log(`error: ${error}`);
+      }
     },
   },
 
