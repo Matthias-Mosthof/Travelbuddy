@@ -40,25 +40,14 @@ export const usePostsStore = defineStore('posts', {
     },
 
     async fetchSupabasePosts() {
-      const client = useSupabaseClient();
+      const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
         const { data } = await client.from('posts').select('*');
         return data;
       });
-      console.log(posts);
 
-      // const dbPosts = await getDocs(collection(db, 'posts'));
-      // const posts = [] as Post[];
-
-      // dbPosts.forEach((doc) => {
-      //   const post = {
-      //     id: doc.id,
-      //     ...doc.data(),
-      //   } as Post;
-
-      //   posts.push(post);
-      // });
-      // this.posts = posts;
+      this.posts = posts.value as unknown as Post[];
+      console.log(this.posts);
     },
 
     async removePost(id: string) {
