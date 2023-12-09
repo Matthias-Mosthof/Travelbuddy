@@ -10,6 +10,7 @@
 - Switching to NUXT: For obvious reasons I switched to nuxt. Quasar and pinia are now implemented as a module. Even its a very small testproject, it saves a lot of code! But thats not the only reason. All benefits of nuxt: https://nuxt.com/
 - Switching to SUPABASE: After exploring the benefits of Supabase - its typesafe approach and its module made for Nuxt, I switched from Firebase to Supabase.
 
+Note that this is a work in progress and the frontend design comes last :D
 # Get this Project Running inside Docker
 
 ```bash

@@ -12,7 +12,7 @@
         round
       />
 
-      <q-toolbar-title> Cheatsheet App </q-toolbar-title>
+      <q-toolbar-title> Travelbuddy </q-toolbar-title>
       <SearchInput placeholder="Suche" />
       <q-btn
         class="q-mr-xs"
