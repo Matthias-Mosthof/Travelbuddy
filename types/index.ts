@@ -1,5 +1,3 @@
-import type { Timestamp } from 'firebase/firestore';
-
 export {};
 
 declare global {
@@ -15,7 +13,7 @@ declare global {
   }
 
   export interface Post extends NewPost {
-    id: string;
-    created_at: Timestamp;
+    id: string | number;
+    created_at: string;
   }
 }

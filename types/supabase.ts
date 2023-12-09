@@ -6,7 +6,7 @@ declare global {
   | string
   | number
   | boolean
-  | null
+
   | { [key: string]: Json | undefined }
   | Json[]
 
@@ -15,40 +15,40 @@ declare global {
       Tables: {
         posts: {
           Row: {
-            age: number | null;
+            age: number;
             created_at: string;
-            email: string | null;
-            gender: string | null;
+            email: string;
+            gender: string;
             id: number;
-            name: string | null;
-            rejected: boolean | null;
-            released: boolean | null;
-            text: string | null;
-            title: string | null;
+            name: string;
+            rejected: boolean;
+            released: boolean;
+            text: string;
+            title: string;
           };
           Insert: {
-            age?: number | null;
+            age?: number;
             created_at?: string;
-            email?: string | null;
-            gender?: string | null;
+            email?: string;
+            gender?: string;
             id?: number;
-            name?: string | null;
-            rejected?: boolean | null;
-            released?: boolean | null;
-            text?: string | null;
-            title?: string | null;
+            name?: string;
+            rejected?: boolean;
+            released?: boolean;
+            text?: string;
+            title?: string;
           };
           Update: {
-            age?: number | null;
+            age?: number;
             created_at?: string;
-            email?: string | null;
-            gender?: string | null;
+            email?: string;
+            gender?: string;
             id?: number;
-            name?: string | null;
-            rejected?: boolean | null;
-            released?: boolean | null;
-            text?: string | null;
-            title?: string | null;
+            name?: string;
+            rejected?: boolean;
+            released?: boolean;
+            text?: string;
+            title?: string;
           };
           Relationships: [];
         };
