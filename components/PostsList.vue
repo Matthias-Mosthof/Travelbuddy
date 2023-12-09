@@ -93,9 +93,7 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
         <div class="text-subtitle3 text-grey-6 q-pl-md">
           Created at
           {{
-            post.createdAt.toDate().toDateString() +
-              ", " +
-              post.createdAt.toDate().toLocaleTimeString("de-DE")
+            post.created_at
           }}
         </div>
         <!-- <div>{{ post.category }}</div> -->
