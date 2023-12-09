@@ -54,27 +54,7 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
                 icon="more_vert"
                 round
               >
-                <q-menu
-                  auto-close
-                  cover
-                >
-                  <q-list>
-                    <q-item
-                      v-close-popup
-                      clickable
-                      @click="usePostsStore().removePost(String(post.id))"
-                    >
-                      <q-item-section>Remove Card</q-item-section>
-                    </q-item>
-                    <q-separator />
-                    <q-item
-                      v-close-popup
-                      clickable
-                    >
-                      <q-item-section>Edit Card</q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-menu>
+                <AdminPostSettings />
               </q-btn>
             </div>
           </div>
