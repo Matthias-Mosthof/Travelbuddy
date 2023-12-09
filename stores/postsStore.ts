@@ -27,15 +27,11 @@ export const usePostsStore = defineStore('posts', {
     },
 
     async addPost(newPost: NewPost) {
+      const client = await useSupabaseClient<Database>();
       try {
-        // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
-        // this.posts.push(newPost);
+        const { data } = await client.from('posts').insert(newPost).select();
 
-        const postRef = await addDoc(collection(db, 'posts'), newPost);
-        await updateDoc(postRef, {
-          createdAt: serverTimestamp(),
-        });
-
+        this.posts.push(data![0] as Post);
         Notify.create({
           message: 'Post added succesfully!',
           type: 'positive',
@@ -46,8 +42,6 @@ export const usePostsStore = defineStore('posts', {
           type: 'negative',
         });
       }
-
-      this.fetchSupabasePosts();
     },
 
     async removePost(id: string) {
