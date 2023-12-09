@@ -1,9 +1,3 @@
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  updateDoc,
-} from 'firebase/firestore';
 import { Notify } from 'quasar';
 
 export const usePostsStore = defineStore('posts', {

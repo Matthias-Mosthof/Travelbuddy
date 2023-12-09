@@ -12,7 +12,6 @@ const store = usePostsStore();
 const state = computed(() => store.getPosts);
 
 const filter = computed(() => store.getFilter);
-// const selectedCategories = computed(() => store.getSelectedCategories);
 
 const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => (
   post.text?.includes(filter.value) || post.title?.includes(filter.value)
@@ -89,14 +88,12 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
         <q-card-section> Alter: {{ post.age }} </q-card-section>
         <q-card-section> Geschlecht: {{ post.gender }} </q-card-section>
 
-        <!-- TODO: Use JS Date Entry for every new sheet instead of firebase timestamp to consume it more conviently -->
         <div class="text-subtitle3 text-grey-6 q-pl-md">
           Created at
           {{
             post.created_at
           }}
         </div>
-        <!-- <div>{{ post.category }}</div> -->
       </q-card>
     </TransitionGroup>
   </div>

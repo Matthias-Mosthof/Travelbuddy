@@ -42,7 +42,6 @@
     "eslint-plugin-cypress": "^2.14.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "firebase": "^10.4.0",
     "loadash": "^1.0.0",
     "pinia": "^2.1.6",
     "postcss": "^8.4.14",
