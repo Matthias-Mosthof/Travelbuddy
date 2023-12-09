@@ -16,6 +16,6 @@ declare global {
 
   export interface Post extends NewPost {
     id: string;
-    createdAt: Timestamp;
+    created_at: Timestamp;
   }
 }
