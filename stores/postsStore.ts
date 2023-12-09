@@ -15,6 +15,17 @@ export const usePostsStore = defineStore('posts', {
   }),
 
   actions: {
+
+    async fetchSupabasePosts() {
+      const client = await useSupabaseClient<Database>();
+      const { data: posts } = await useAsyncData('posts', async () => {
+        const { data } = await client.from('posts').select('*');
+        return data;
+      });
+
+      this.posts = posts.value as unknown as Post[];
+    },
+
     async addPost(newPost: NewPost) {
       try {
         // note to self: addDoc function lets firerbase create an id, with setDoc function one can create own id
@@ -37,16 +48,6 @@ export const usePostsStore = defineStore('posts', {
       }
 
       this.fetchSupabasePosts();
-    },
-
-    async fetchSupabasePosts() {
-      const client = await useSupabaseClient<Database>();
-      const { data: posts } = await useAsyncData('posts', async () => {
-        const { data } = await client.from('posts').select('*');
-        return data;
-      });
-
-      this.posts = posts.value as unknown as Post[];
     },
 
     async removePost(id: string) {
