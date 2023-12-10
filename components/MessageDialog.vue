@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const parentprops = defineProps({
   name: {
     type: String,
     default: '',
@@ -13,9 +13,19 @@ defineProps({
 const showMessageModal = ref(false);
 const messageContent = ref('');
 const messageEmail = ref('');
+const messageName = ref('');
 
-function sendMail(email: string) {
-  console.log(email);
+function triggerSendMessage() {
+  const message: Message = {
+    text: messageContent.value,
+    fromEmail: messageEmail.value,
+    toEmail: parentprops.email,
+    fromName: messageName.value,
+    toName: parentprops.name,
+
+  };
+
+  sendMessage(message);
   showMessageModal.value = false;
 }
 
@@ -42,7 +52,7 @@ function onReset() {
       <q-form
         class="q-gutter-md"
         @reset="onReset"
-        @submit="sendMail(email)"
+        @submit="triggerSendMessage()"
       >
         <q-input
           v-model="messageContent"
@@ -63,10 +73,19 @@ function onReset() {
           standout="bg-green-4 text-white"
           type="email"
         />
+        <q-input
+          v-model="messageName"
+          class="rounded-borders bg-green-3"
+          filled
+          label="Dein Nickname"
+          required
+          standout="bg-green-4 text-white"
+          type="text"
+        />
         <q-btn
           color="primary"
           icon="check"
-          label="Veröffentlichen"
+          label="Senden"
           type="submit"
         />
         <q-btn
