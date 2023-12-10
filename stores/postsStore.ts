@@ -1,5 +1,3 @@
-import { Notify } from 'quasar';
-
 export const usePostsStore = defineStore('posts', {
   state: () => ({
     posts: [] as Post[],
