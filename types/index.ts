@@ -16,4 +16,12 @@ declare global {
     id: string | number;
     created_at: string;
   }
+
+  export interface Message {
+    text: string;
+    fromEmail: string;
+    toEmail: string;
+    toName: string;
+    fromName: string;
+  }
 }
