@@ -31,7 +31,7 @@ export const usePostsStore = defineStore('posts', {
       }
     },
 
-    async removePost(id: string) {
+    async removePost(id: number) {
       const client = await useSupabaseClient<Database>();
       try {
         await client.from('posts').delete().match({ id });

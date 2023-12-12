@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps({
   postId: {
-    type: String,
-    default: '',
+    type: Number,
+    default: null,
   },
 });
 
@@ -17,7 +17,7 @@ defineProps({
       <q-item
         v-close-popup
         clickable
-        @click="usePostsStore().removePost(String(postId))"
+        @click="usePostsStore().removePost(postId)"
       >
         <q-item-section>Remove Card</q-item-section>
       </q-item>
