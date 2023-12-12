@@ -43,6 +43,29 @@ export const usePostsStore = defineStore('posts', {
         notificateUser('Error deleting post', 'negative');
       }
     },
+
+    async releasePost(id: number) {
+      const client = await useSupabaseClient<Database>();
+      try {
+        await client.from('posts').update({ released: true, rejected: false }).match({ id });
+        const index = this.posts.findIndex((post: Post) => post.id === id);
+        this.posts[index].released = true;
+        notificateUser('Post released successfully!', 'positive');
+      } catch (error) {
+        console.log(`error: ${error}`);
+      }
+    },
+    async rejectPost(id: number) {
+      const client = await useSupabaseClient<Database>();
+      try {
+        await client.from('posts').update({ rejected: true, released: false }).match({ id });
+        const index = this.posts.findIndex((post: Post) => post.id === id);
+        this.posts[index].rejected = true;
+        notificateUser('Post rejected successfully!', 'positive');
+      } catch (error) {
+        console.log(`error: ${error}`);
+      }
+    },
   },
 
   getters: {

@@ -32,7 +32,8 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
         v-for="post in filteredPosts"
         :key="post.id"
         bordered
-        class="my-card q-pa-md"
+        :class="`q-pa-md ${isAdmin && post.released === true ? 'bg-positive' : 'released' &&
+          isAdmin && post.rejected === true ? 'bg-negative' : 'released'}`"
         dark
         flat
       >
@@ -81,6 +82,7 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
           }}
         </div>
         <MessageDialog
+          v-if="!isAdmin"
           :email="post.email"
           :name="post.name"
         />
@@ -90,7 +92,7 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
 </template>
 
 <style scoped>
-.my-card {
+.released {
   background: radial-gradient(circle, #35a2ff 0%, #014a88 100%);
   width: 20rem;
 }

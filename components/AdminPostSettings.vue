@@ -19,14 +19,32 @@ defineProps({
         clickable
         @click="usePostsStore().removePost(postId)"
       >
-        <q-item-section>Remove Card</q-item-section>
+        <q-item-section>Löschen</q-item-section>
       </q-item>
       <q-separator />
       <q-item
         v-close-popup
         clickable
       >
-        <q-item-section>Edit Card</q-item-section>
+        <q-item-section>Bearbeiten</q-item-section>
+      </q-item>
+      <q-separator />
+
+      <q-item
+        clickable
+        @click="usePostsStore().releasePost(postId)"
+      >
+        <q-item-section>
+          Freigeben
+        </q-item-section>
+      </q-item>
+      <q-item
+        clickable
+        @click="usePostsStore().rejectPost(postId)"
+      >
+        <q-item-section>
+          Ablehnen
+        </q-item-section>
       </q-item>
     </q-list>
   </q-menu>
