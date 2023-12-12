@@ -54,7 +54,7 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
                 icon="more_vert"
                 round
               >
-                <AdminPostSettings />
+                <AdminPostSettings :post-id="post.id" />
               </q-btn>
             </div>
           </div>

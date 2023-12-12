@@ -13,7 +13,7 @@ declare global {
   }
 
   export interface Post extends NewPost {
-    id: string | number;
+    id: number;
     created_at: string;
   }
 
