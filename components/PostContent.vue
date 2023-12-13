@@ -22,13 +22,13 @@ defineProps({
 
 <template>
   <q-card-section>
-    <div class="text-overline text-orange-9">
+    <div class="text-overline text-green-7">
       {{ `Von ${postName} (${postAge}) ` }}
     </div>
-    <div class="text-h5 q-mt-sm q-mb-xs">
+    <div class="text-h5 text-bold q-mt-sm q-mb-lg">
       {{ postTitle }}
     </div>
-    <div class="text-caption text-grey">
+    <div class="text-caption text-white">
       {{ postText }}
     </div>
   </q-card-section>
