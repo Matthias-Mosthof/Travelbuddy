@@ -37,50 +37,18 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
         dark
         flat
       >
-        <q-card-section>
-          <div class="row items-center no-wrap">
-            <div class="col">
-              <div class="text-h6">
-                {{ post.title }}
-              </div>
-            </div>
+        <PostContent
+          :post-age="post.age"
+          :post-name="post.name"
+          :post-text="post.text"
+          :post-title="post.title"
+        />
 
-            <div
-              class="col-auto"
-            >
-              <q-btn
-                v-if="isAdmin"
-                color="grey-7"
-                flat
-                icon="more_vert"
-                round
-              >
-                <AdminPostSettings :post-id="post.id" />
-              </q-btn>
-            </div>
-          </div>
-        </q-card-section>
+        <AdminPostSettings
+          v-if="isAdmin"
+          :post-id="post.id"
+        />
 
-        <q-card-section>
-          {{ post.text }}
-        </q-card-section>
-
-        <q-card-section>
-          Name: {{ post.name }}
-        </q-card-section>
-        <q-card-section>
-          Alter: {{ post.age }}
-        </q-card-section>
-        <q-card-section>
-          Geschlecht: {{ post.gender }}
-        </q-card-section>
-
-        <div class="text-subtitle3 text-grey-6 q-pl-md">
-          Created at
-          {{
-            post.created_at
-          }}
-        </div>
         <MessageDialog
           v-if="!isAdmin"
           :email="post.email"
