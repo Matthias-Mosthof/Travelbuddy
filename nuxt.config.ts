@@ -5,6 +5,14 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui',
     '@nuxtjs/eslint-module',
     '@nuxtjs/supabase',
+    ['@nuxtjs/google-fonts', {
+      families: {
+        'DM Sans': {
+          wght: '200..900',
+          ital: '200..700',
+        },
+      },
+    }],
   ],
 
   quasar: {
