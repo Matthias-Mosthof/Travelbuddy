@@ -28,7 +28,7 @@ defineProps({
     <div class="text-h5 text-bold q-mt-sm q-mb-lg">
       {{ postTitle }}
     </div>
-    <div class="text-caption text-white">
+    <div class="text-body1 text-white">
       {{ postText }}
     </div>
   </q-card-section>
