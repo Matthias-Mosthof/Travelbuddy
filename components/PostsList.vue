@@ -20,10 +20,10 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
 </script>
 
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md post-container">
     <TransitionGroup
       appear
-      class="row q-gutter-md"
+      class="row q-gutter-md justify-center"
       enter-active-class="animated fadeIn"
       enter-leave-class="animated fadeOut"
       tag="div"
@@ -60,8 +60,11 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
 </template>
 
 <style scoped>
+.post-container {
+  max-width: 100em;
+}
 .released {
-  background: radial-gradient(circle, #35a2ff 0%, #014a88 100%);
-  width: 20rem;
+  background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
+  width: 50rem;
 }
 </style>
