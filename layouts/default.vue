@@ -16,3 +16,9 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<style>
+body {
+  font-family: 'DM Sans';
+}
+</style>
