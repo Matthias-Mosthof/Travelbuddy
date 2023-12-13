@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const darkModeStatus = ref(false);
+
+</script>
+
 <template>
   <q-header
     bordered
@@ -20,6 +25,13 @@
         flat
         icon="apps"
         round
+      />
+      <q-toggle
+        v-model="darkModeStatus"
+        color="black"
+        dark
+        icon="nightlight"
+        @click="Dark.toggle"
       />
       <q-btn
         dense

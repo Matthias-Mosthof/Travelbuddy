@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   ],
 
   quasar: {
-    plugins: ['Notify', 'Loading', 'Dialog'],
+    plugins: ['Notify', 'Loading', 'Dialog', 'Dark'],
     extras: {
       animations: 'all',
     },
