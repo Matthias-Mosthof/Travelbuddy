@@ -29,10 +29,6 @@ function triggerSendMessage() {
   showMessageModal.value = false;
 }
 
-function onReset() {
-  console.log('closed');
-}
-
 </script>
 
 <template>
@@ -51,7 +47,6 @@ function onReset() {
     <div>
       <q-form
         class="q-gutter-md"
-        @reset="onReset"
         @submit="triggerSendMessage()"
       >
         <q-input
