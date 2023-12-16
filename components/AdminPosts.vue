@@ -85,13 +85,28 @@ const columns: QTableProps['columns'] = [
 </script>
 
 <template>
-  <div class="q-pa-md">
+  <div class="q-px-xl">
+    <h3>
+      Alle Posts
+    </h3>
+    <div class="q-gutter-xl">
+      <q-badge color="black">
+        {{ `${posts.length} Posts ingesesamt` }}<q-icon
+          class="q-ml-xs"
+          color="white"
+          label="test"
+          name="check"
+        />
+      </q-badge>
+    </div>
+
     <q-table
       bordered
       :columns="columns"
       flat
       :rows="posts"
-      :rows-per-page-options="[10,0]"
+      :rows-per-page-options="[5, 10,0]"
+      title="Alle Posts"
       :wrap-cells="true"
     />
   </div>
