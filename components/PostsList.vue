@@ -17,6 +17,22 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
   post.text?.includes(filter.value) || post.title?.includes(filter.value)
 )));
 
+const postsAmount = computed(() => store.pagination.postsAmount);
+const pageAmount = computed(() => postsAmount.value / 10);
+
+const currentPage = ref(1);
+
+function fetchPostsForCurrentPage() {
+  const postsPerPage = 10;
+  const startIndex = (currentPage.value - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage - 1;
+
+  store.pagination.firstPostIndex = startIndex;
+  store.pagination.lastPostIndex = endIndex;
+
+  store.fetchLimitedPosts();
+}
+
 </script>
 
 <template>
@@ -56,10 +72,20 @@ const filteredPosts = computed((): Post[] => state.value.filter((post: Post) => 
         />
       </q-card>
     </TransitionGroup>
+
+    <q-pagination
+      v-model="currentPage"
+      boundary-numbers
+      direction-links
+      :max="pageAmount"
+      :max-pages="6"
+      @update:model-value="fetchPostsForCurrentPage"
+    />
   </div>
 </template>
 
 <style scoped>
+
 .post-container {
   max-width: 100em;
 }
