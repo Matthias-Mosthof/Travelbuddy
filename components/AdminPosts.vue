@@ -9,9 +9,9 @@ const props = defineProps({
   },
 });
 
-const releasedPostsAmount = computed(() => props.posts.filter((p) => p.released === true));
+const releasedPosts = computed(() => props.posts.filter((p) => p.released === true));
 
-const rejectedPostsAmount = computed(() => props.posts.filter((p) => p.rejected === true));
+const rejectedPosts = computed(() => props.posts.filter((p) => p.rejected === true));
 
 const columns: QTableProps['columns'] = [
   {
@@ -101,7 +101,7 @@ const columns: QTableProps['columns'] = [
       </q-badge>
 
       <q-badge color="orange-9">
-        {{ `${posts.length - releasedPostsAmount.length} Prüfung erforderlich` }}<q-icon
+        {{ `${posts.length - releasedPosts.length} Prüfung erforderlich` }}<q-icon
           class="q-ml-xs q-px-sm"
           color="white"
           label="test"
@@ -110,7 +110,7 @@ const columns: QTableProps['columns'] = [
       </q-badge>
 
       <q-badge color="green-9">
-        {{ `${releasedPostsAmount.length} freigebene Posts` }}<q-icon
+        {{ `${releasedPosts.length} freigebene Posts` }}<q-icon
           class="q-ml-xs q-px-sm"
           color="white"
           label="test"
@@ -119,7 +119,7 @@ const columns: QTableProps['columns'] = [
       </q-badge>
 
       <q-badge color="red">
-        {{ `${rejectedPostsAmount.length} abgelehnte Posts` }}<q-icon
+        {{ `${rejectedPosts.length} abgelehnte Posts` }}<q-icon
           class="q-ml-xs q-px-sm"
           color="white"
           label="test"
@@ -128,13 +128,42 @@ const columns: QTableProps['columns'] = [
       </q-badge>
     </div>
 
+    <div class="q-gutter-md" />
     <q-table
       bordered
+      class="q-my-lg"
       :columns="columns"
+      dense
       flat
       :rows="posts"
       :rows-per-page-options="[5, 10,0]"
       title="Alle Posts"
+      :wrap-cells="true"
+    />
+
+    <q-table
+      bordered
+      class="q-my-lg"
+      :columns="columns"
+      dense
+      flat
+
+      :rows="releasedPosts"
+      :rows-per-page-options="[5, 10,0]"
+      title="Freigegebene Posts"
+      :wrap-cells="true"
+    />
+
+    <q-table
+      bordered
+      class="q-my-lg"
+      :columns="columns"
+      dense
+
+      flat
+      :rows="rejectedPosts"
+      :rows-per-page-options="[5, 10,0]"
+      title="Abgelehnte Posts"
       :wrap-cells="true"
     />
   </div>
