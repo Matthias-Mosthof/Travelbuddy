@@ -22,7 +22,10 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 <template>
   <PublicPosts v-if="!isAdmin" />
 
-  <AdminPosts v-if="isAdmin" />
+  <AdminPosts
+    v-if="isAdmin"
+    :posts="posts"
+  />
 </template>
 
 <style scoped>
