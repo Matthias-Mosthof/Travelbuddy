@@ -33,6 +33,10 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
       <h1 id="heading">
         Postübersicht
       </h1>
+      <SceletonPosts
+        v-if="posts.length < 1"
+        class="sceleton"
+      />
 
       <p v-if="posts.length < 1">
         Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
@@ -78,6 +82,10 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 }
 .released {
   background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
+  width: 50rem;
+}
+
+.sceleton {
   width: 50rem;
 }
 </style>
