@@ -4,11 +4,16 @@ export const usePostsStore = defineStore('posts', {
     filter: '',
     categories: [],
     selectedCategories: [],
+    pagination: {
+      postsAmount: 0,
+      firstPostIndex: 0,
+      lastPostIndex: 9,
+    },
   }),
 
   actions: {
 
-    async fetchSupabasePosts() {
+    async fetchAllPosts() {
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
         const { data } = await client.from('posts').select('*');
@@ -16,6 +21,26 @@ export const usePostsStore = defineStore('posts', {
       });
 
       this.posts = posts.value as unknown as Post[];
+    },
+
+    async fetchLimitedPosts() {
+      const client = await useSupabaseClient<Database>();
+      const { data: posts } = await useAsyncData('posts', async () => {
+        const { data } = await client.from('posts').select('*').range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
+        return data;
+      });
+
+      this.posts = posts.value as unknown as Post[];
+    },
+
+    async fetchPostsAmount() {
+      const client = await useSupabaseClient<Database>();
+      const { data: posts } = await useAsyncData('posts', async () => {
+        const { count } = await client.from('posts').select('*', { count: 'estimated', head: true });
+        return count;
+      });
+
+      this.pagination.postsAmount = posts.value as number;
     },
 
     async addPost(newPost: NewPost) {
@@ -75,5 +100,9 @@ export const usePostsStore = defineStore('posts', {
     getFilter(state) {
       return state.filter;
     },
+    getPaginationParameters(state) {
+      return state.pagination;
+    },
+
   },
 });
