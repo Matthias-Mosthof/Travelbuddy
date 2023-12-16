@@ -2,12 +2,16 @@
 
 import { type QTableProps } from 'quasar';
 
-defineProps({
+const props = defineProps({
   posts: {
     type: Array as () => Post[],
     required: true,
   },
 });
+
+const releasedPostsAmount = computed(() => props.posts.filter((p) => p.released === true));
+
+const rejectedPostsAmount = computed(() => props.posts.filter((p) => p.rejected === true));
 
 const columns: QTableProps['columns'] = [
   {
@@ -86,16 +90,40 @@ const columns: QTableProps['columns'] = [
 
 <template>
   <div class="q-px-xl">
-    <h3>
-      Alle Posts
-    </h3>
-    <div class="q-gutter-xl">
+    <div class="q-gutter-md q-my-md">
       <q-badge color="black">
         {{ `${posts.length} Posts ingesesamt` }}<q-icon
-          class="q-ml-xs"
+          class="q-ml-xs q-px-sm"
           color="white"
           label="test"
           name="check"
+        />
+      </q-badge>
+
+      <q-badge color="orange-9">
+        {{ `${posts.length - releasedPostsAmount.length} Prüfung erforderlich` }}<q-icon
+          class="q-ml-xs q-px-sm"
+          color="white"
+          label="test"
+          name="warning"
+        />
+      </q-badge>
+
+      <q-badge color="green-9">
+        {{ `${releasedPostsAmount.length} freigebene Posts` }}<q-icon
+          class="q-ml-xs q-px-sm"
+          color="white"
+          label="test"
+          name="check"
+        />
+      </q-badge>
+
+      <q-badge color="red">
+        {{ `${rejectedPostsAmount.length} abgelehnte Posts` }}<q-icon
+          class="q-ml-xs q-px-sm"
+          color="white"
+          label="test"
+          name="warning"
         />
       </q-badge>
     </div>
