@@ -4,10 +4,11 @@ definePageMeta({
 });
 
 const store = usePostsStore();
-const { fetchSupabasePosts } = store;
+const { fetchPostsAmount, fetchLimitedPosts } = store;
 
-onMounted(() => {
-  fetchSupabasePosts();
+onMounted(async () => {
+  await fetchPostsAmount();
+  await fetchLimitedPosts();
 });
 </script>
 
