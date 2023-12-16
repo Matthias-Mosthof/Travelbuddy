@@ -1,4 +1,5 @@
 <script setup lang=ts>
+import { scroll } from 'quasar';
 
 const store = usePostsStore();
 
@@ -7,15 +8,19 @@ const pageAmount = computed(() => postsAmount.value / 10);
 
 const currentPage = ref(1);
 
-function fetchPostsForCurrentPage() {
+const windowHeight = ref(0);
+
+async function fetchPostsForCurrentPage() {
+  const el = document.getElementById('heading');
   const postsPerPage = 10;
+  windowHeight.value = window.innerHeight;
   const startIndex = (currentPage.value - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage - 1;
 
   store.pagination.firstPostIndex = startIndex;
   store.pagination.lastPostIndex = endIndex;
-
-  store.fetchLimitedPosts();
+  el?.scrollIntoView({ behavior: 'smooth' });
+  await store.fetchLimitedPosts();
 }
 
 </script>

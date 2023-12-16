@@ -20,14 +20,25 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 </script>
 
 <template>
-  <div class="q-pa-md post-container">
+  <div
+    class="q-pa-md"
+  >
     <TransitionGroup
       appear
-      class="row q-gutter-md justify-center"
+      class="column q-gutter-md q-mx-xl items-center"
       enter-active-class="animated fadeIn"
       enter-leave-class="animated fadeOut"
       tag="div"
     >
+      <h1 id="heading">
+        Postübersicht
+      </h1>
+
+      <p v-if="posts.length < 1">
+        Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
+        <!-- Nur im development -->
+      </p>
+
       <q-card
         v-for="post in filteredPosts"
         :key="post.id"
@@ -55,9 +66,8 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
           :name="post.name"
         />
       </q-card>
+      <PostPagination />
     </TransitionGroup>
-
-    <PostPagination />
   </div>
 </template>
 
