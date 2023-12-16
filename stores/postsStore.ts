@@ -16,7 +16,9 @@ export const usePostsStore = defineStore('posts', {
     async fetchAllPosts() {
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
-        const { data } = await client.from('posts').select('*');
+        const { data } = await client.from('posts')
+          .select('*')
+          .order('released', { ascending: true });
         return data;
       });
 
@@ -26,7 +28,10 @@ export const usePostsStore = defineStore('posts', {
     async fetchLimitedPosts() {
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
-        const { data } = await client.from('posts').select('*').range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
+        const { data } = await client.from('posts')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
         return data;
       });
 
