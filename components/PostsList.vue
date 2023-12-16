@@ -47,8 +47,9 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
         v-for="post in filteredPosts"
         :key="post.id"
         bordered
-        :class="`q-pa-md ${isAdmin && post.released === true ? 'bg-positive' : 'released' &&
-          isAdmin && post.rejected === true ? 'bg-negative' : 'released'}`"
+        :class="`q-pa-md one-post
+        ${isAdmin && post.released === true ? 'bg-positive' : 'status-released' &&
+        isAdmin && post.rejected === true ? 'status-rejected' : 'status-released'}`"
         dark
         flat
       >
@@ -61,6 +62,7 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 
         <AdminPostSettings
           v-if="isAdmin"
+          class="no-wrap absolute-top-right on-left"
           :post-id="post.id"
         />
 
@@ -80,9 +82,14 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 .post-container {
   max-width: 100em;
 }
-.released {
+.status-released {
   background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
+}
+.one-post {
   width: 50rem;
+}
+.status-rejected {
+  background: red
 }
 
 .sceleton {
