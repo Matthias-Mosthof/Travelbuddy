@@ -11,6 +11,18 @@
 - Switching to SUPABASE: After exploring the benefits of Supabase - its typesafe approach and its module made for Nuxt, I switched from Firebase to Supabase.
 
 Note that this is a work in progress and the frontend design comes last :D
+
+## Some core Features
+- Sending Emails handled by backend but close to the user, via Edge Functions
+- Serverside Pagination
+
+## Stack used
+- Nuxt 3
+- Pinia
+- Quasar
+- Supabase
+- Resend (Email API) linked with real domain and supabase
+
 # Get this Project Running inside Docker
 
 ```bash

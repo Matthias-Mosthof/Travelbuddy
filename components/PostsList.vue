@@ -77,6 +77,7 @@ function fetchPostsForCurrentPage() {
       v-model="currentPage"
       boundary-numbers
       direction-links
+      :ellipses="true"
       :max="pageAmount"
       :max-pages="6"
       @update:model-value="fetchPostsForCurrentPage"
