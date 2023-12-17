@@ -15,6 +15,6 @@ onMounted(() => {
 <template>
   <div>
     <PostsList :is-admin="true" />
-    <PostAdd />
+    <PostAdd :is-admin="true" />
   </div>
 </template>
