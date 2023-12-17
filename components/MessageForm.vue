@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const parentprops = defineProps({
   name: {
     type: String,
@@ -13,6 +14,7 @@ const parentprops = defineProps({
 const messageContent = ref('');
 const messageEmail = ref('');
 const messageName = ref('');
+const showExpansion = ref();
 
 function triggerSendMessage() {
   const message: Message = {
@@ -23,8 +25,8 @@ function triggerSendMessage() {
     toName: parentprops.name,
 
   };
-
   sendMessage(message);
+  showExpansion.value = false;
 }
 
 </script>
@@ -32,18 +34,22 @@ function triggerSendMessage() {
 <template>
   <q-expansion-item
     dense
+    dense-toggle
+    :duration="1500"
     expand-separator
+    header-class="text-secondary"
     icon="message"
     :label="`Nachricht an ${name} Senden`"
-    style="width: 400px"
+    :model-value="showExpansion"
+    style="width: 300px"
   >
     <q-form
       class="q-gutter-md"
-      @submit="triggerSendMessage()"
+      @submit="triggerSendMessage"
     >
       <q-input
         v-model="messageContent"
-        class="rounded-borders bg-green-3"
+        class="rounded-borders q-mt-xl bg-green-3"
         filled
         :label="`Deine Nachricht an ${name}`"
         required
