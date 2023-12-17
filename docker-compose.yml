@@ -5,10 +5,11 @@ services:
     build:
       context: .
     image: nuxt_dev
-    container_name: nuxt_test_project
+    container_name: Urlaubsgesellschaft
     command: npm run dev
     volumes:
       - .:/app
       - /app/node_modules
+      - /tmp 
     ports:
       - "3000:3000"
