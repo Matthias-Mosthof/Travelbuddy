@@ -20,30 +20,13 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 </script>
 
 <template>
-  <PublicPosts v-if="!isAdmin" />
+  <PublicPosts
+    v-if="!isAdmin"
+    :posts="filteredPosts"
+  />
 
   <AdminPosts
     v-if="isAdmin"
     :posts="posts"
   />
 </template>
-
-<style scoped>
-
-.post-container {
-  max-width: 100em;
-}
-.status-released {
-  background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
-}
-.one-post {
-  width: 50rem;
-}
-.status-rejected {
-  background: red
-}
-
-.sceleton {
-  width: 50rem;
-}
-</style>

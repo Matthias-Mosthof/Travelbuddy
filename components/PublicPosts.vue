@@ -20,15 +20,22 @@ defineProps({
       enter-leave-class="animated fadeOut"
       tag="div"
     >
-      <h1 id="heading">
+      <h1
+        id="heading"
+        key="1"
+      >
         Postübersicht
       </h1>
       <SceletonPosts
         v-if="posts.length < 1"
+        key="2"
         class="one-post"
       />
 
-      <p v-if="posts.length < 1">
+      <p
+        v-if="posts.length < 1"
+        key="3"
+      >
         Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
         <!-- Nur im development -->
       </p>
@@ -53,7 +60,7 @@ defineProps({
           :name="post.name"
         />
       </q-card>
-      <PostPagination />
+      <PostPagination key="5" />
     </TransitionGroup>
   </div>
 </template>
