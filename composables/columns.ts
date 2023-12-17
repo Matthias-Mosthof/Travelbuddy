@@ -7,6 +7,7 @@ export const adminPostColumns: QTableProps['columns'] = [
     align: 'left',
     field: 'id',
     required: true,
+    sortable: true,
   },
   {
     name: 'created_at',
