@@ -54,9 +54,9 @@ export const usePostsStore = defineStore('posts', {
         const { data } = await client.from('posts').insert(newPost).select();
 
         this.posts.push(data![0] as Post);
-        notificateUser('Post added succesfully!', 'positive');
+        notifyUser('Post added succesfully!', 'positive');
       } catch (error) {
-        notificateUser('Error adding post, something went wrong', 'negative');
+        notifyUser('Error adding post, something went wrong', 'negative');
       }
     },
 
@@ -65,9 +65,9 @@ export const usePostsStore = defineStore('posts', {
       try {
         await client.from('posts').delete().match({ id });
         this.posts = this.posts.filter((post: Post) => post.id !== id);
-        notificateUser('Post deleted successfully!', 'positive');
+        notifyUser('Post deleted successfully!', 'positive');
       } catch (error) {
-        notificateUser('Error deleting post', 'negative');
+        notifyUser('Error deleting post', 'negative');
       }
     },
 
@@ -77,9 +77,9 @@ export const usePostsStore = defineStore('posts', {
         await client.from('posts').update({ released: true, rejected: false }).match({ id });
         const index = this.posts.findIndex((post: Post) => post.id === id);
         this.posts[index].released = true;
-        notificateUser('Post released successfully!', 'positive');
+        notifyUser('Post released successfully!', 'positive');
       } catch (error) {
-        notificateUser('Error', 'negativ');
+        notifyUser('Error', 'negativ');
       }
     },
     async rejectPost(id: number) {
@@ -88,9 +88,9 @@ export const usePostsStore = defineStore('posts', {
         await client.from('posts').update({ rejected: true, released: false }).match({ id });
         const index = this.posts.findIndex((post: Post) => post.id === id);
         this.posts[index].rejected = true;
-        notificateUser('Post rejected successfully!', 'positive');
+        notifyUser('Post rejected successfully!', 'positive');
       } catch (error) {
-        notificateUser('Error', 'negativ');
+        notifyUser('Error', 'negativ');
       }
     },
   },
