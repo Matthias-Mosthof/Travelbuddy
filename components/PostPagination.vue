@@ -1,6 +1,4 @@
 <script setup lang=ts>
-import { scroll } from 'quasar';
-
 const store = usePostsStore();
 
 const postsAmount = computed(() => store.pagination.postsAmount);

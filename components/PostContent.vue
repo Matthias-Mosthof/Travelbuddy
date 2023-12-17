@@ -26,7 +26,7 @@ const toggleReadMore = ref(false);
 function getTextHeight() {
   const el = postTextRef.value as HTMLElement;
   elHeight.value = el.clientHeight;
-  console.log(elHeight.value);
+
   if (elHeight.value < 200) {
     textIsLong.value = false;
   }
