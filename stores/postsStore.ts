@@ -56,7 +56,6 @@ export const usePostsStore = defineStore('posts', {
         this.posts.push(data![0] as Post);
         notificateUser('Post added succesfully!', 'positive');
       } catch (error) {
-        console.log(error);
         notificateUser('Error adding post, something went wrong', 'negative');
       }
     },
@@ -66,10 +65,8 @@ export const usePostsStore = defineStore('posts', {
       try {
         await client.from('posts').delete().match({ id });
         this.posts = this.posts.filter((post: Post) => post.id !== id);
-        console.log(`successfully deleted document with id ${id}`);
         notificateUser('Post deleted successfully!', 'positive');
       } catch (error) {
-        console.log(`error: ${error}`);
         notificateUser('Error deleting post', 'negative');
       }
     },
@@ -82,7 +79,7 @@ export const usePostsStore = defineStore('posts', {
         this.posts[index].released = true;
         notificateUser('Post released successfully!', 'positive');
       } catch (error) {
-        console.log(`error: ${error}`);
+        notificateUser('Error', 'negativ');
       }
     },
     async rejectPost(id: number) {
@@ -93,7 +90,7 @@ export const usePostsStore = defineStore('posts', {
         this.posts[index].rejected = true;
         notificateUser('Post rejected successfully!', 'positive');
       } catch (error) {
-        console.log(`error: ${error}`);
+        notificateUser('Error', 'negativ');
       }
     },
   },
