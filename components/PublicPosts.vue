@@ -55,7 +55,7 @@ defineProps({
           :post-title="post.title"
         />
 
-        <MessageDialog
+        <MessageForm
           :email="post.email"
           :name="post.name"
         />

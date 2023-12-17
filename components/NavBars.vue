@@ -17,7 +17,7 @@ const darkModeStatus = ref(false);
         round
       />
 
-      <q-toolbar-title> Travelbuddy </q-toolbar-title>
+      <q-toolbar-title> Urlaubsgesellschaft </q-toolbar-title>
       <SearchInput placeholder="Suche" />
       <q-btn
         class="q-mr-xs"
