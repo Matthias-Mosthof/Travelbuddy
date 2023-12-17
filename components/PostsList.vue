@@ -25,7 +25,7 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
     :posts="filteredPosts"
   />
 
-  <AdminPosts
+  <AdminPanel
     v-if="isAdmin"
     :posts="posts"
   />
