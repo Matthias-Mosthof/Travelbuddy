@@ -25,3 +25,6 @@ logs
 
 # Dummy Data for DB
 *.csv
+
+# Todo file
+todos.txt
