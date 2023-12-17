@@ -1,21 +1,11 @@
 <script setup lang="ts">
 
 defineProps({
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  posts: {
+    type: Array as () => Post[],
+    required: true,
   },
 });
-
-const store = usePostsStore();
-
-const posts = computed(() => store.getPosts);
-
-const filter = computed(() => store.getFilter);
-
-const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => (
-  post.text?.includes(filter.value) || post.title?.includes(filter.value)
-)));
 
 </script>
 
@@ -35,7 +25,7 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
       </h1>
       <SceletonPosts
         v-if="posts.length < 1"
-        class="sceleton"
+        class="one-post"
       />
 
       <p v-if="posts.length < 1">
@@ -44,12 +34,10 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
       </p>
 
       <q-card
-        v-for="post in filteredPosts"
+        v-for="post in posts"
         :key="post.id"
         bordered
-        :class="`q-pa-md one-post
-        ${isAdmin && post.released === true ? 'bg-positive' : 'status-released' &&
-        isAdmin && post.rejected === true ? 'status-rejected' : 'status-released'}`"
+        class="q-pa-md one-post status-released"
         dark
         flat
       >
@@ -60,14 +48,7 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
           :post-title="post.title"
         />
 
-        <AdminPostSettings
-          v-if="isAdmin"
-          class="no-wrap absolute-top-right on-left"
-          :post-id="post.id"
-        />
-
         <MessageDialog
-          v-if="!isAdmin"
           :email="post.email"
           :name="post.name"
         />
@@ -83,16 +64,10 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
   max-width: 100em;
 }
 .status-released {
-  background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
+    background: radial-gradient(ellipse at bottom left, #003f15e3 0%, #011300 100%);
 }
 .one-post {
-  width: 50rem;
-}
-.status-rejected {
-  background: red
+    width: 50rem;
 }
 
-.sceleton {
-  width: 50rem;
-}
 </style>
