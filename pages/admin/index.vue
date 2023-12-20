@@ -15,6 +15,5 @@ onMounted(() => {
 <template>
   <div>
     <GeneralPostPanel :is-admin="true" />
-    <PostAdd :is-admin="true" />
   </div>
 </template>
