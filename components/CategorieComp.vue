@@ -22,4 +22,6 @@ function addSelection() {
   store.addSelectedCategorie(selection.value);
 }
 </script> -->
-<template></template>
+<template>
+  <div />
+</template>

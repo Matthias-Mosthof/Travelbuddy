@@ -17,7 +17,7 @@ onMounted(async () => {
 
 <template>
   <q-page-container>
-    <PostsList />
+    <GeneralPostPanel />
     <PostAdd />
   </q-page-container>
 </template>

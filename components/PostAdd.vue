@@ -1,12 +1,5 @@
 <script setup lang="ts">
 
-defineProps({
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
-});
-
 const toggleCard = ref(false);
 const postsStore = usePostsStore();
 const { addPost } = postsStore;
@@ -53,7 +46,6 @@ function onSubmit() {
 
 <template>
   <q-page-sticky
-    v-if="!isAdmin"
     :offset="[18, 18]"
     position="bottom-right"
   >
