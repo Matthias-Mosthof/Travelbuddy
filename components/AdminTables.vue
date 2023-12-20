@@ -60,5 +60,5 @@ const selected = ref([] as Post[]);
     :wrap-cells="true"
   />
 
-  <AdminButtons :selected="selected" />
+  <AdminActions :selected="selected" />
 </template>
