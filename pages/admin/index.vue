@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <PostsList :is-admin="true" />
+    <GeneralPostPanel :is-admin="true" />
     <PostAdd :is-admin="true" />
   </div>
 </template>

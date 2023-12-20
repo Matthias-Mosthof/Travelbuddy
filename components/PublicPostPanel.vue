@@ -26,7 +26,7 @@ defineProps({
       >
         Postübersicht
       </h1>
-      <SceletonPosts
+      <PublicSceletonPosts
         v-if="posts.length < 1"
         key="2"
         class="one-post"
@@ -55,12 +55,12 @@ defineProps({
           :post-title="post.title"
         />
 
-        <MessageForm
+        <PublicMessageForm
           :email="post.email"
           :name="post.name"
         />
       </q-card>
-      <PostPagination key="5" />
+      <PublicPostPagination key="5" />
     </TransitionGroup>
   </div>
 </template>

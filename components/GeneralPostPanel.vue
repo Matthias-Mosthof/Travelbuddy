@@ -20,12 +20,12 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
 </script>
 
 <template>
-  <PublicPosts
+  <PublicPostPanel
     v-if="!isAdmin"
     :posts="filteredPosts"
   />
 
-  <AdminPosts
+  <AdminPostPanel
     v-if="isAdmin"
     :posts="posts"
   />
