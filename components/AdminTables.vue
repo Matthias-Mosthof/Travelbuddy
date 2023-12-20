@@ -64,6 +64,7 @@ const hintMessage = computed(() => {
     :columns="adminPostColumns"
     dense
     flat
+    :loading="posts.length < 1"
     :rows="posts"
     :rows-per-page-options="[5, 10,0]"
     selection="multiple"
@@ -77,7 +78,7 @@ const hintMessage = computed(() => {
     :columns="adminPostColumns"
     dense
     flat
-
+    :loading="releasedPosts.length < 1"
     :rows="releasedPosts"
     :rows-per-page-options="[5, 10,0]"
     title="Freigegebene Posts"
@@ -90,6 +91,7 @@ const hintMessage = computed(() => {
     :columns="adminPostColumns"
     dense
     flat
+    :loading="rejectedPosts.length < 1"
     :rows="rejectedPosts"
     :rows-per-page-options="[5, 10,0]"
     title="Abgelehnte Posts"
