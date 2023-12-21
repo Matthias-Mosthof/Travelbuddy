@@ -12,10 +12,10 @@ defineProps({
 <template>
   <q-input
     v-model="store.filter"
-    bg-color="info"
     debounce="100"
-    filled
+    outlined
     :placeholder="placeholder"
+    style="width: 20rem;"
     type="search"
   >
     <template #append>
