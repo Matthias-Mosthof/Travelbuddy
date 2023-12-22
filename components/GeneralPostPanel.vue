@@ -17,6 +17,7 @@ const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => 
   post.text?.toLowerCase().includes(filter.value.searchTerm.toLowerCase())
   && post.title?.toLowerCase().includes(filter.value.searchTerm.toLowerCase())
   && (post.age >= filter.value.ageRange.min && post.age <= filter.value.ageRange.max)
+  && (post.gender.includes(filter.value.gender))
 )));
 
 </script>
