@@ -23,6 +23,20 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
 
     <SearchBar />
 
+    <p v-if="posts.length < 1 && !filterIsActive">
+      Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
+    <!-- Nur im development -->
+    </p>
+
+    <p v-if="posts.length < 1 && filterIsActive">
+      Deine Suche ergab leider keine Treffer.
+    </p>
+
+    <PublicSceletonPosts
+      v-if="posts.length < 1 && !filterIsActive"
+      class="one-post"
+    />
+
     <TransitionGroup
       appear
       class="column q-gutter-md q-mx-xl items-center"
@@ -30,27 +44,6 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
       enter-leave-class="animated fadeOut"
       tag="div"
     >
-      <p
-        v-if="posts.length < 1 && !filterIsActive"
-        key="3"
-      >
-        Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
-      <!-- Nur im development -->
-      </p>
-
-      <p
-        v-if="posts.length < 1 && filterIsActive"
-        key="3"
-      >
-        Deine Suche ergab leider keine Treffer.      <!-- Nur im development -->
-      </p>
-
-      <PublicSceletonPosts
-        v-if="posts.length < 1 && !filterIsActive"
-        key="2"
-        class="one-post"
-      />
-
       <q-card
         v-for="post in posts"
         :key="post.id"
