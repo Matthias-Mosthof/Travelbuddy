@@ -6,6 +6,8 @@ defineProps({
     required: true,
   },
 });
+const store = usePostsStore();
+const filterIsActive = computed(() => store.getAnyFilterIsActive);
 
 </script>
 
@@ -20,6 +22,7 @@ defineProps({
     </h1>
 
     <SearchBar />
+
     <TransitionGroup
       appear
       class="column q-gutter-md q-mx-xl items-center"
@@ -28,15 +31,22 @@ defineProps({
       tag="div"
     >
       <p
-        v-if="posts.length < 1"
+        v-if="posts.length < 1 && !filterIsActive"
         key="3"
       >
         Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
       <!-- Nur im development -->
       </p>
 
+      <p
+        v-if="posts.length < 1 && filterIsActive"
+        key="3"
+      >
+        Deine Suche ergab leider keine Treffer.      <!-- Nur im development -->
+      </p>
+
       <PublicSceletonPosts
-        v-if="posts.length < 1"
+        v-if="posts.length < 1 && !filterIsActive"
         key="2"
         class="one-post"
       />
