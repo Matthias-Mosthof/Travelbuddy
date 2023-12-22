@@ -4,8 +4,8 @@ export const usePostsStore = defineStore('posts', {
     filter: {
       searchTerm: '',
       ageRange: {
-        min: 0,
-        max: 0,
+        min: 18,
+        max: 99,
       } as AgeRange,
       gender: '',
     } as SearchFilter,
