@@ -12,6 +12,9 @@ function triggerFilter() {
 </script>
 
 <template>
+  <div class="q-pr-md ">
+    Alter von/bis:
+  </div>
   <q-range
     v-model="rangeLabel"
     class="q-pl-md"

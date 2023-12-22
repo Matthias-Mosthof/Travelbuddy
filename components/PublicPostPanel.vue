@@ -7,23 +7,6 @@ defineProps({
   },
 });
 
-const store = usePostsStore();
-
-const rangeLabel: Ref<AgeRange> = ref({ min: 18, max: 99 });
-
-function triggerFilter() {
-  setTimeout(() => {
-    store.filter.ageRange.min = rangeLabel.value.min;
-    store.filter.ageRange.max = rangeLabel.value.max;
-  }, 200);
-}
-
-const gender = ref('');
-function triggerGenderFilter() {
-  setTimeout(() => {
-    store.filter.gender = gender.value;
-  }, 200);
-}
 </script>
 
 <template>
@@ -35,34 +18,8 @@ function triggerGenderFilter() {
     >
       Postübersicht
     </h1>
-    <q-form
-      class="q-pa-md q-ma-md fit row wrap justify-around filter-bar items-center"
-      style="max-width: 45rem;"
-    >
-      <SearchInput placeholder="Dein Suchbegriff.." />
 
-      <div class="column ">
-        <div class="row items-center align-center">
-          <div class="q-pr-md ">
-            Alter von/bis:
-          </div>
-
-          <q-range
-            v-model="rangeLabel"
-            class="q-pl-md"
-            color="primary"
-            label-always
-            markers
-            :max="99"
-            :min="18"
-            :step="1"
-            style="width:120px"
-            @change="triggerFilter"
-          />
-        </div>
-      </div>
-    </q-form>
-
+    <SearchBar />
     <TransitionGroup
       appear
       class="column q-gutter-md q-mx-xl items-center"
@@ -70,19 +27,19 @@ function triggerGenderFilter() {
       enter-leave-class="animated fadeOut"
       tag="div"
     >
-      <PublicSceletonPosts
-        v-if="posts.length < 1"
-        key="2"
-        class="one-post"
-      />
-
       <p
         v-if="posts.length < 1"
         key="3"
       >
         Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
-        <!-- Nur im development -->
+      <!-- Nur im development -->
       </p>
+
+      <PublicSceletonPosts
+        v-if="posts.length < 1"
+        key="2"
+        class="one-post"
+      />
 
       <q-card
         v-for="post in posts"
