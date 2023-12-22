@@ -9,12 +9,20 @@ defineProps({
 
 const store = usePostsStore();
 
-const gender = ref('mä');
 const rangeLabel: Ref<AgeRange> = ref({ min: 18, max: 99 });
 
 function triggerFilter() {
-  store.filter.ageRange.min = rangeLabel.value.min;
-  store.filter.ageRange.max = rangeLabel.value.max;
+  setTimeout(() => {
+    store.filter.ageRange.min = rangeLabel.value.min;
+    store.filter.ageRange.max = rangeLabel.value.max;
+  }, 200);
+}
+
+const gender = ref('');
+function triggerGenderFilter() {
+  setTimeout(() => {
+    store.filter.gender = gender.value;
+  }, 200);
 }
 </script>
 
@@ -63,7 +71,8 @@ function triggerFilter() {
             label="M"
             size="sm"
             unchecked-icon="panorama_fish_eye"
-            val="m"
+            val="männlich"
+            @click="triggerGenderFilter"
           />
           <q-radio
             v-model="gender"
@@ -71,7 +80,8 @@ function triggerFilter() {
             label="W"
             size="xs"
             unchecked-icon="panorama_fish_eye"
-            val="w"
+            val="weiblich"
+            @click="triggerGenderFilter"
           />
 
           <q-radio
@@ -80,7 +90,8 @@ function triggerFilter() {
             label="egal"
             size="xs"
             unchecked-icon="panorama_fish_eye"
-            val="egal"
+            val=""
+            @click="triggerGenderFilter"
           />
         </div>
       </div>
