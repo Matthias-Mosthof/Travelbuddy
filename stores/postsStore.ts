@@ -112,6 +112,11 @@ export const usePostsStore = defineStore('posts', {
     getPaginationParameters(state) {
       return state.pagination;
     },
-
+    getAnyFilterIsActive(state) {
+      return state.filter.gender.length > 0
+      || state.filter.searchTerm.length > 0
+      || state.filter.ageRange.min > 18
+      || state.filter.ageRange.max < 99;
+    },
   },
 });
