@@ -1,7 +1,14 @@
 export const usePostsStore = defineStore('posts', {
   state: () => ({
     posts: [] as Post[],
-    filter: '',
+    filter: {
+      searchTerm: '',
+      ageRange: {
+        min: 0,
+        max: 0,
+      } as AgeRange,
+      gender: '',
+    } as SearchFilter,
     categories: [],
     selectedCategories: [],
     pagination: {

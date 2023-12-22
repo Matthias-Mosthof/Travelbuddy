@@ -24,4 +24,15 @@ declare global {
     toName: string;
     fromName: string;
   }
+
+  export interface AgeRange {
+    min: number;
+    max: number;
+  }
+
+  export interface SearchFilter {
+    searchTerm: string;
+    ageRange: AgeRange;
+    gender: string | 'M' | 'W' | 'D';
+  }
 }
