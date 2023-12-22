@@ -6,11 +6,15 @@ defineProps({
     required: true,
   },
 });
+
+const store = usePostsStore();
+
 const gender = ref('mä');
-const rangeLabel = ref({ min: 18, max: 99 });
+const rangeLabel: Ref<AgeRange> = ref({ min: 18, max: 99 });
 
 function triggerFilter() {
-  console.log(rangeLabel.value);
+  store.filter.ageRange.min = rangeLabel.value.min;
+  store.filter.ageRange.max = rangeLabel.value.max;
 }
 </script>
 

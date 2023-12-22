@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <q-input
-    v-model="store.filter"
+    v-model="store.filter.searchTerm"
     debounce="100"
     outlined
     :placeholder="placeholder"

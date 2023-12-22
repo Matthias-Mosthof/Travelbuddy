@@ -14,7 +14,7 @@ const posts = computed(() => store.getPosts);
 const filter = computed(() => store.getFilter);
 
 const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => (
-  post.text?.includes(filter.value) || post.title?.includes(filter.value)
+  post.text?.includes(filter.value.searchTerm) || post.title?.includes(filter.value.searchTerm)
 )));
 
 </script>
