@@ -1,7 +1,7 @@
 <script setup lang=ts>
 const store = usePostsStore();
 
-const postsAmount = computed(() => store.pagination.postsAmount);
+const postsAmount = computed(() => store.getPostsAmount);
 const pageAmount = computed(() => postsAmount.value / 10);
 
 const currentPage = ref(1);
@@ -17,8 +17,8 @@ async function fetchPostsForCurrentPage() {
 
   store.pagination.firstPostIndex = startIndex;
   store.pagination.lastPostIndex = endIndex;
-  el?.scrollIntoView({ behavior: 'smooth' });
   await store.fetchLimitedPosts();
+  el?.scrollIntoView({ behavior: 'smooth' });
 }
 
 </script>
