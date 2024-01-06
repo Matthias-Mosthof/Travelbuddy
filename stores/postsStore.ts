@@ -118,5 +118,8 @@ export const usePostsStore = defineStore('posts', {
       || state.filter.ageRange.min > 18
       || state.filter.ageRange.max < 99;
     },
+    getPostsAmount(state) {
+      return state.pagination.postsAmount;
+    },
   },
 });
