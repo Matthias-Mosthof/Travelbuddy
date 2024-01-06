@@ -1,7 +1,9 @@
 <script setup lang=ts>
 const store = usePostsStore();
 
-const postsAmount = computed(() => store.getPostsAmount);
+const paginationParameters = computed(() => store.getPaginationParameters);
+const postsAmount = computed(() => paginationParameters.value.postsAmount);
+
 const pageAmount = computed(() => postsAmount.value / 10);
 
 const currentPage = ref(1);
@@ -25,7 +27,7 @@ async function fetchPostsForCurrentPage() {
 
 <template>
   <q-pagination
-    v-model="currentPage"
+    v-model="store.$state.pagination.currentPage"
     boundary-numbers
     direction-links
     :ellipses="true"

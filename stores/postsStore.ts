@@ -12,6 +12,7 @@ export const usePostsStore = defineStore('posts', {
     categories: [],
     selectedCategories: [],
     pagination: {
+      currentPage: 1,
       postsAmount: 0,
       firstPostIndex: 0,
       lastPostIndex: 9,
@@ -33,6 +34,7 @@ export const usePostsStore = defineStore('posts', {
     },
 
     async fetchLimitedPosts() {
+      this.pagination.currentPage = 1;
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
         const searchTerm = `%${this.filter.searchTerm}%`;
@@ -43,8 +45,8 @@ export const usePostsStore = defineStore('posts', {
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
         return { data, count };
       });
-      this.posts = posts.value?.data as unknown as Post[];
       this.pagination.postsAmount = posts.value?.count as number;
+      this.posts = posts.value?.data as unknown as Post[];
     },
 
     async fetchPostsAmount() {
@@ -119,9 +121,6 @@ export const usePostsStore = defineStore('posts', {
       || state.filter.searchTerm.length > 0
       || state.filter.ageRange.min > 18
       || state.filter.ageRange.max < 99;
-    },
-    getPostsAmount(state) {
-      return state.pagination.postsAmount;
     },
   },
 });
