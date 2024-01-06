@@ -40,8 +40,7 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
     <TransitionGroup
       appear
       class="column q-gutter-md q-mx-xl items-center"
-      enter-active-class="animated fadeIn"
-      enter-leave-class="animated fadeOut"
+
       tag="div"
     >
       <q-card
