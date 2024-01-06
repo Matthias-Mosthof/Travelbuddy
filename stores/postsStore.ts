@@ -35,13 +35,14 @@ export const usePostsStore = defineStore('posts', {
     async fetchLimitedPosts() {
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
+        const searchTerm = `%${this.filter.searchTerm}%`;
         const { data } = await client.from('posts')
           .select('*')
+          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}, name.ilike.${searchTerm}`)
           .order('created_at', { ascending: false })
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
         return data;
       });
-
       this.posts = posts.value as unknown as Post[];
     },
 

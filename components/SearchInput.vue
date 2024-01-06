@@ -17,6 +17,7 @@ defineProps({
     :placeholder="placeholder"
     style="width: 20rem;"
     type="search"
+    @update:model-value="store.fetchLimitedPosts"
   >
     <template #append>
       <q-icon name="search" />
