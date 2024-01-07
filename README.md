@@ -15,8 +15,11 @@
 Note that this is a work in progress and the frontend design comes last :D
 
 ## Some core Features
-- Sending Emails handled by backend but close to the user, via Edge Functions
+- Creating Posts
+- Managing Posts
+- Sending Messages to each other via Email handled by backend but close to the user, via Edge Functions
 - Serverside Pagination
+- Serverside Live Filter & Search
 
 ## Stack used
 - Nuxt 3

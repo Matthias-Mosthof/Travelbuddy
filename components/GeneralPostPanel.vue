@@ -11,18 +11,12 @@ const store = usePostsStore();
 
 const posts = computed(() => store.getPosts);
 
-const filter = computed(() => store.getFilter);
-
-const filteredPosts = computed((): Post[] => posts.value.filter((post: Post) => (
-  post.text?.includes(filter.value) || post.title?.includes(filter.value)
-)));
-
 </script>
 
 <template>
   <PublicPostPanel
     v-if="!isAdmin"
-    :posts="filteredPosts"
+    :posts="posts"
   />
 
   <AdminPostPanel

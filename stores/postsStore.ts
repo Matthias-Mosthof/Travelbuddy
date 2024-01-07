@@ -1,10 +1,18 @@
 export const usePostsStore = defineStore('posts', {
   state: () => ({
     posts: [] as Post[],
-    filter: '',
+    filter: {
+      searchTerm: '',
+      ageRange: {
+        min: 18,
+        max: 99,
+      } as AgeRange,
+      gender: '',
+    } as SearchFilter,
     categories: [],
     selectedCategories: [],
     pagination: {
+      currentPage: 1,
       postsAmount: 0,
       firstPostIndex: 0,
       lastPostIndex: 9,
@@ -25,17 +33,30 @@ export const usePostsStore = defineStore('posts', {
       this.posts = posts.value as unknown as Post[];
     },
 
+    resetPagination() {
+      if (this.filter.searchTerm.length > 0) {
+        this.pagination.currentPage = 1;
+        this.pagination.firstPostIndex = 0;
+        this.pagination.lastPostIndex = 9;
+      }
+    },
+
     async fetchLimitedPosts() {
+      if (this.filter.searchTerm.length > 0) {
+        this.resetPagination();
+      }
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
-        const { data } = await client.from('posts')
-          .select('*')
+        const searchTerm = `%${this.filter.searchTerm}%`;
+        const { data, count } = await client.from('posts')
+          .select('*', { count: 'estimated', head: false })
+          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}, name.ilike.${searchTerm}`)
           .order('created_at', { ascending: false })
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
-        return data;
+        return { data, count };
       });
-
-      this.posts = posts.value as unknown as Post[];
+      this.posts = posts.value?.data as unknown as Post[];
+      this.pagination.postsAmount = posts.value?.count as number;
     },
 
     async fetchPostsAmount() {
@@ -105,6 +126,11 @@ export const usePostsStore = defineStore('posts', {
     getPaginationParameters(state) {
       return state.pagination;
     },
-
+    getAnyFilterIsActive(state) {
+      return state.filter.gender.length > 0
+      || state.filter.searchTerm.length > 0
+      || state.filter.ageRange.min > 18
+      || state.filter.ageRange.max < 99;
+    },
   },
 });

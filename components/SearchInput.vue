@@ -11,12 +11,13 @@ defineProps({
 
 <template>
   <q-input
-    v-model="store.filter"
-    bg-color="info"
+    v-model="store.filter.searchTerm"
     debounce="100"
-    filled
+    outlined
     :placeholder="placeholder"
+    style="width: 20rem;"
     type="search"
+    @update:model-value="store.fetchLimitedPosts"
   >
     <template #append>
       <q-icon name="search" />

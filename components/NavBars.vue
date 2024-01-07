@@ -18,7 +18,6 @@ const darkModeStatus = ref(false);
       />
 
       <q-toolbar-title> Urlaubsgesellschaft </q-toolbar-title>
-      <SearchInput placeholder="Suche" />
       <q-btn
         class="q-mr-xs"
         dense

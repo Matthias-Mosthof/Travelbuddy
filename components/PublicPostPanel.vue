@@ -6,40 +6,43 @@ defineProps({
     required: true,
   },
 });
+const store = usePostsStore();
+const filterIsActive = computed(() => store.getAnyFilterIsActive);
 
 </script>
 
 <template>
   <div
-    class="q-pa-md"
+    class="q-pa-md  justify-content column  items-center"
   >
+    <h1
+      id="heading"
+    >
+      Postübersicht
+    </h1>
+
+    <SearchBar />
+
+    <p v-if="posts.length < 1 && !filterIsActive">
+      Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
+    <!-- Nur im development -->
+    </p>
+
+    <p v-if="posts.length < 1 && filterIsActive">
+      Deine Suche ergab leider keine Treffer.
+    </p>
+
+    <PublicSceletonPosts
+      v-if="posts.length < 1 && !filterIsActive"
+      class="one-post"
+    />
+
     <TransitionGroup
       appear
       class="column q-gutter-md q-mx-xl items-center"
-      enter-active-class="animated fadeIn"
-      enter-leave-class="animated fadeOut"
+
       tag="div"
     >
-      <h1
-        id="heading"
-        key="1"
-      >
-        Postübersicht
-      </h1>
-      <PublicSceletonPosts
-        v-if="posts.length < 1"
-        key="2"
-        class="one-post"
-      />
-
-      <p
-        v-if="posts.length < 1"
-        key="3"
-      >
-        Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
-        <!-- Nur im development -->
-      </p>
-
       <q-card
         v-for="post in posts"
         :key="post.id"
@@ -79,4 +82,8 @@ defineProps({
     width: 50rem;
 }
 
+.filter-bar {
+  border: 1px solid rgb(150, 150, 150);
+  border-radius: 5px;
+}
 </style>
