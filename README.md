@@ -1,7 +1,9 @@
 # Dockerized Nuxt (Vite) App using Quasar & Pinia Module
 
-- Just a small Test Project using Nuxt w/SUPABASE DB.
-- Its kind of sad there is the need to tell this, but no line was generated with ChatGPT or any other Code AI.
+-  This "Travelbuddy" app contents user generated content for finding Travelbuddys as well as an Admintool to manage the content. Users can create posts and message each other without authentication.
+
+- Its kind of sad there is the need to tell this, but no line was generated with ChatGPT or any other Code AI. (Not because I think its bad, but this project is there to improve my coding skills)
+
 
 ## Progress
 
@@ -13,8 +15,11 @@
 Note that this is a work in progress and the frontend design comes last :D
 
 ## Some core Features
-- Sending Emails handled by backend but close to the user, via Edge Functions
+- Creating Posts
+- Managing Posts
+- Sending Messages to each other via Email handled by backend but close to the user, via Edge Functions
 - Serverside Pagination
+- Serverside Live Filter & Search
 
 ## Stack used
 - Nuxt 3
