@@ -5,13 +5,6 @@
   >
     <SearchInput placeholder="Dein Suchbegriff.." />
 
-    <div class="column ">
-      <div class="row items-center align-center">
-        <SearchRange />
-      </div>
-      <div class="row items-center">
-        <SearchRadio />
-      </div>
-    </div>
+    <SearchAdvanced />
   </q-form>
 </template>
