@@ -9,7 +9,9 @@ defineProps({
 });
 
 async function triggerSearch() {
-  store.filter.advancedSearch.isActive = false;
+  setTimeout(() => {
+    store.filter.advancedSearch.isActive = false;
+  }, 200);
   await store.resetPagination();
   await store.fetchLimitedPosts();
 }
@@ -18,7 +20,7 @@ async function triggerSearch() {
 <template>
   <q-input
     v-model="store.filter.searchTerm"
-    debounce="100"
+    debounce="200"
     outlined
     :placeholder="placeholder"
     style="width: 20rem;"
