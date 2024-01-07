@@ -5,8 +5,8 @@ const rangeLabel: Ref<AgeRange> = ref({ min: 18, max: 99 });
 
 function triggerFilter() {
   setTimeout(() => {
-    store.filter.ageRange.min = rangeLabel.value.min;
-    store.filter.ageRange.max = rangeLabel.value.max;
+    store.filter.advancedSearch.ageRange.min = rangeLabel.value.min;
+    store.filter.advancedSearch.ageRange.max = rangeLabel.value.max;
   }, 200);
 }
 </script>
@@ -19,7 +19,7 @@ function triggerFilter() {
     v-model="rangeLabel"
     class="q-pl-md"
     color="primary"
-    label-always
+    label
     markers
     :max="99"
     :min="18"

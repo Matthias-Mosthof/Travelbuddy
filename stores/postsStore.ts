@@ -3,11 +3,14 @@ export const usePostsStore = defineStore('posts', {
     posts: [] as Post[],
     filter: {
       searchTerm: '',
-      ageRange: {
-        min: 18,
-        max: 99,
-      } as AgeRange,
-      gender: '',
+      advancedSearch: {
+        isActive: false,
+        ageRange: {
+          min: 18,
+          max: 99,
+        } as AgeRange,
+        gender: '',
+      },
     } as SearchFilter,
     categories: [],
     selectedCategories: [],
@@ -33,26 +36,27 @@ export const usePostsStore = defineStore('posts', {
       this.posts = posts.value as unknown as Post[];
     },
 
-    resetPagination() {
-      if (this.filter.searchTerm.length > 0) {
-        this.pagination.currentPage = 1;
-        this.pagination.firstPostIndex = 0;
-        this.pagination.lastPostIndex = 9;
-      }
+    async resetPagination() {
+      this.pagination.currentPage = 1;
+      this.pagination.firstPostIndex = 0;
+      this.pagination.lastPostIndex = 9;
     },
 
     async fetchLimitedPosts() {
-      if (this.filter.searchTerm.length > 0) {
-        this.resetPagination();
-      }
       const client = await useSupabaseClient<Database>();
+      const searchTerm = `%${this.filter.searchTerm}%`;
       const { data: posts } = await useAsyncData('posts', async () => {
-        const searchTerm = `%${this.filter.searchTerm}%`;
         const { data, count } = await client.from('posts')
           .select('*', { count: 'estimated', head: false })
-          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}, name.ilike.${searchTerm}`)
           .order('created_at', { ascending: false })
+          .or(this.filter.advancedSearch.gender.length > 0
+            && this.filter.searchTerm.length < 1
+            ? `gender.ilike.%${this.filter.advancedSearch.gender}%`
+            : `title.ilike.${searchTerm}, text.ilike.${searchTerm}`)
+          .gte('age', this.filter.advancedSearch.ageRange.min)
+          .lte('age', this.filter.advancedSearch.ageRange.max)
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
+
         return { data, count };
       });
       this.posts = posts.value?.data as unknown as Post[];
@@ -127,10 +131,9 @@ export const usePostsStore = defineStore('posts', {
       return state.pagination;
     },
     getAnyFilterIsActive(state) {
-      return state.filter.gender.length > 0
-      || state.filter.searchTerm.length > 0
-      || state.filter.ageRange.min > 18
-      || state.filter.ageRange.max < 99;
+      return state.filter.searchTerm.length > 0
+       || state.filter.advancedSearch.isActive
+      || state.filter.advancedSearch.gender.length > 0;
     },
   },
 });

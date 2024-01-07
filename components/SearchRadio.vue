@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const store = usePostsStore();
 
-const gender = ref('');
-function triggerGenderFilter() {
-  setTimeout(() => {
-    store.filter.gender = gender.value;
-  }, 200);
-}
+const searchTermIsActive = computed(() => store.filter.searchTerm.length > 0);
+
+watch(searchTermIsActive, () => {
+  store.filter.advancedSearch.gender = '';
+});
+
 </script>
 
 <template>
@@ -14,31 +14,28 @@ function triggerGenderFilter() {
     Geschlecht:
   </div>
   <q-radio
-    v-model="gender"
+    v-model="store.filter.advancedSearch.gender"
     checked-icon="male"
     label="M"
     size="sm"
     unchecked-icon="panorama_fish_eye"
-    val="männlich"
-    @click="triggerGenderFilter"
+    val="m"
   />
   <q-radio
-    v-model="gender"
+    v-model="store.filter.advancedSearch.gender"
     checked-icon="female"
     label="W"
     size="xs"
     unchecked-icon="panorama_fish_eye"
-    val="weiblich"
-    @click="triggerGenderFilter"
+    val="w"
   />
 
   <q-radio
-    v-model="gender"
+    v-model="store.filter.advancedSearch.gender"
     checked-icon="task_alt"
     label="egal"
     size="xs"
     unchecked-icon="panorama_fish_eye"
     val=""
-    @click="triggerGenderFilter"
   />
 </template>
