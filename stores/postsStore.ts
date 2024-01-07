@@ -20,6 +20,7 @@ export const usePostsStore = defineStore('posts', {
       firstPostIndex: 0,
       lastPostIndex: 9,
     },
+    loading: false,
   }),
 
   actions: {
@@ -43,6 +44,7 @@ export const usePostsStore = defineStore('posts', {
     },
 
     async fetchLimitedPosts() {
+      this.loading = true;
       const client = await useSupabaseClient<Database>();
       const searchTerm = `%${this.filter.searchTerm}%`;
       const { data: posts } = await useAsyncData('posts', async () => {
@@ -61,6 +63,7 @@ export const usePostsStore = defineStore('posts', {
       });
       this.posts = posts.value?.data as unknown as Post[];
       this.pagination.postsAmount = posts.value?.count as number;
+      this.loading = false;
     },
 
     async fetchPostsAmount() {
@@ -134,6 +137,9 @@ export const usePostsStore = defineStore('posts', {
       return state.filter.searchTerm.length > 0
        || state.filter.advancedSearch.isActive
       || state.filter.advancedSearch.gender.length > 0;
+    },
+    getLoadingState(state) {
+      return state.loading;
     },
   },
 });
