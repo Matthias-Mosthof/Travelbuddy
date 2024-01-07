@@ -49,10 +49,14 @@ export const usePostsStore = defineStore('posts', {
         const { data, count } = await client.from('posts')
           .select('*', { count: 'estimated', head: false })
           .order('created_at', { ascending: false })
-          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}`)
+          .or(this.filter.advancedSearch.gender.length > 0
+            && this.filter.searchTerm.length < 1
+            ? `gender.ilike.%${this.filter.advancedSearch.gender}%`
+            : `title.ilike.${searchTerm}, text.ilike.${searchTerm}`)
           .gte('age', this.filter.advancedSearch.ageRange.min)
           .lte('age', this.filter.advancedSearch.ageRange.max)
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
+
         return { data, count };
       });
       this.posts = posts.value?.data as unknown as Post[];
