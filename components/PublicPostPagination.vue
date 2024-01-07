@@ -3,23 +3,24 @@ const store = usePostsStore();
 
 const paginationParameters = computed(() => store.getPaginationParameters);
 const postsAmount = computed(() => paginationParameters.value.postsAmount);
-
+const currentPage = computed(() => paginationParameters.value.currentPage);
 const pageAmount = computed(() => postsAmount.value / 10);
-
-const currentPage = ref(1);
 
 const windowHeight = ref(0);
 
 async function fetchPostsForCurrentPage() {
   const el = document.getElementById('heading');
-  const postsPerPage = 10;
   windowHeight.value = window.innerHeight;
+
+  const postsPerPage = 10;
   const startIndex = (currentPage.value - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage - 1;
 
   store.pagination.firstPostIndex = startIndex;
   store.pagination.lastPostIndex = endIndex;
+
   await store.fetchLimitedPosts();
+
   el?.scrollIntoView({ behavior: 'smooth' });
 }
 

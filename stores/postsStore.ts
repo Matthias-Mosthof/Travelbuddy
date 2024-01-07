@@ -33,8 +33,18 @@ export const usePostsStore = defineStore('posts', {
       this.posts = posts.value as unknown as Post[];
     },
 
+    resetPagination() {
+      if (this.filter.searchTerm.length > 0) {
+        this.pagination.currentPage = 1;
+        this.pagination.firstPostIndex = 0;
+        this.pagination.lastPostIndex = 9;
+      }
+    },
+
     async fetchLimitedPosts() {
-      this.pagination.currentPage = 1;
+      if (this.filter.searchTerm.length > 0) {
+        this.resetPagination();
+      }
       const client = await useSupabaseClient<Database>();
       const { data: posts } = await useAsyncData('posts', async () => {
         const searchTerm = `%${this.filter.searchTerm}%`;
@@ -45,8 +55,8 @@ export const usePostsStore = defineStore('posts', {
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
         return { data, count };
       });
-      this.pagination.postsAmount = posts.value?.count as number;
       this.posts = posts.value?.data as unknown as Post[];
+      this.pagination.postsAmount = posts.value?.count as number;
     },
 
     async fetchPostsAmount() {
