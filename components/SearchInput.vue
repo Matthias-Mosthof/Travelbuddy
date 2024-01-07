@@ -7,6 +7,11 @@ defineProps({
     required: true,
   },
 });
+
+async function triggerSearch() {
+  await store.resetPagination();
+  await store.fetchLimitedPosts();
+}
 </script>
 
 <template>
@@ -17,7 +22,7 @@ defineProps({
     :placeholder="placeholder"
     style="width: 20rem;"
     type="search"
-    @update:model-value="store.fetchFilteredPosts"
+    @update:model-value="triggerSearch"
   >
     <template #append>
       <q-icon name="search" />

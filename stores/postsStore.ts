@@ -36,7 +36,7 @@ export const usePostsStore = defineStore('posts', {
       this.posts = posts.value as unknown as Post[];
     },
 
-    resetPagination() {
+    async resetPagination() {
       this.pagination.currentPage = 1;
       this.pagination.firstPostIndex = 0;
       this.pagination.lastPostIndex = 9;
@@ -44,28 +44,14 @@ export const usePostsStore = defineStore('posts', {
 
     async fetchLimitedPosts() {
       const client = await useSupabaseClient<Database>();
+      const searchTerm = `%${this.filter.searchTerm}%`;
       const { data: posts } = await useAsyncData('posts', async () => {
         const { data, count } = await client.from('posts')
           .select('*', { count: 'estimated', head: false })
           .order('created_at', { ascending: false })
-          .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
-        return { data, count };
-      });
-      this.posts = posts.value?.data as unknown as Post[];
-      this.pagination.postsAmount = posts.value?.count as number;
-    },
-
-    async fetchFilteredPosts() {
-      this.resetPagination();
-      const client = await useSupabaseClient<Database>();
-      const { data: posts } = await useAsyncData('posts', async () => {
-        const searchTerm = `%${this.filter.searchTerm}%`;
-        const { data, count } = await client.from('posts')
-          .select('*', { count: 'estimated', head: false })
-          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}, name.ilike.${searchTerm}`)
+          .or(`title.ilike.${searchTerm}, text.ilike.${searchTerm}`)
           .gte('age', this.filter.advancedSearch.ageRange.min)
           .lte('age', this.filter.advancedSearch.ageRange.max)
-          .order('created_at', { ascending: false })
           .range(this.pagination.firstPostIndex, this.pagination.lastPostIndex);
         return { data, count };
       });

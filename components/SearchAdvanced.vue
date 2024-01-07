@@ -3,7 +3,8 @@ const store = usePostsStore();
 
 function triggerAdvancedSearch() {
   store.$state.filter.advancedSearch.isActive = true;
-  store.fetchFilteredPosts();
+  store.resetPagination();
+  store.fetchLimitedPosts();
 }
 </script>
 

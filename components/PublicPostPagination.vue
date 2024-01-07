@@ -5,7 +5,6 @@ const paginationParameters = computed(() => store.getPaginationParameters);
 const postsAmount = computed(() => paginationParameters.value.postsAmount);
 const currentPage = computed(() => paginationParameters.value.currentPage);
 const pageAmount = computed(() => postsAmount.value / 10);
-
 const windowHeight = ref(0);
 
 async function fetchPostsForCurrentPage() {
@@ -18,7 +17,6 @@ async function fetchPostsForCurrentPage() {
 
   store.pagination.firstPostIndex = startIndex;
   store.pagination.lastPostIndex = endIndex;
-
   await store.fetchLimitedPosts();
 
   el?.scrollIntoView({ behavior: 'smooth' });

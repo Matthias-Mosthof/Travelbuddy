@@ -19,7 +19,7 @@ function triggerGenderFilter() {
     label="M"
     size="sm"
     unchecked-icon="panorama_fish_eye"
-    val="männlich"
+    val="m"
     @click="triggerGenderFilter"
   />
   <q-radio
@@ -28,7 +28,7 @@ function triggerGenderFilter() {
     label="W"
     size="xs"
     unchecked-icon="panorama_fish_eye"
-    val="weiblich"
+    val="w"
     @click="triggerGenderFilter"
   />
 
