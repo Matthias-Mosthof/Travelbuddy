@@ -19,7 +19,7 @@ function triggerFilter() {
     v-model="rangeLabel"
     class="q-pl-md"
     color="primary"
-    label-always
+    label
     markers
     :max="99"
     :min="18"

@@ -31,7 +31,13 @@ function triggerAdvancedSearch() {
           color="primary"
           label="Suchen"
           type="submit"
-        />
+        >
+          <q-icon
+            name="search"
+            right
+            size="xs"
+          />
+        </q-btn>
       </div>
     </q-form>
   </q-expansion-item>
