@@ -21,11 +21,11 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
       Postübersicht
     </h1>
 
-    <SearchOverview />
+    <SearchOverview class="q-mb-xl" />
 
     <p v-if="posts.length < 1 && !filterIsActive">
       Du siehst keine Daten, weil du kein Zugriff auf die Datenbank hast.
-    <!-- Nur im development -->
+      <!-- Nur im development -->
     </p>
 
     <p v-if="posts.length < 1 && filterIsActive">

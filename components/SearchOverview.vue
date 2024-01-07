@@ -6,5 +6,7 @@
     <SearchInput placeholder="Dein Suchbegriff.." />
 
     <SearchAdvanced />
+
+    <LoadingGears />
   </div>
 </template>
