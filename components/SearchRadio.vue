@@ -4,7 +4,7 @@ const store = usePostsStore();
 const gender = ref('');
 function triggerGenderFilter() {
   setTimeout(() => {
-    store.filter.gender = gender.value;
+    store.filter.advancedSearch.gender = gender.value;
   }, 200);
 }
 </script>

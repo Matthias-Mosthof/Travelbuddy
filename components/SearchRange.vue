@@ -5,8 +5,8 @@ const rangeLabel: Ref<AgeRange> = ref({ min: 18, max: 99 });
 
 function triggerFilter() {
   setTimeout(() => {
-    store.filter.ageRange.min = rangeLabel.value.min;
-    store.filter.ageRange.max = rangeLabel.value.max;
+    store.filter.advancedSearch.ageRange.min = rangeLabel.value.min;
+    store.filter.advancedSearch.ageRange.max = rangeLabel.value.max;
   }, 200);
 }
 </script>
