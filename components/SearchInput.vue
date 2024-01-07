@@ -9,6 +9,7 @@ defineProps({
 });
 
 async function triggerSearch() {
+  store.filter.advancedSearch.isActive = false;
   await store.resetPagination();
   await store.fetchLimitedPosts();
 }

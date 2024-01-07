@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const store = usePostsStore();
-const expanded = ref(false);
 
 function triggerAdvancedSearch() {
   store.filter.advancedSearch.isActive = true;
@@ -11,7 +10,7 @@ function triggerAdvancedSearch() {
 
 <template>
   <q-expansion-item
-    v-model="expanded"
+    v-model="store.filter.advancedSearch.isActive"
     :disable="store.filter.searchTerm.length > 0"
     icon="manage_search"
     label="Erweiterte Suche"
