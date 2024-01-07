@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const store = usePostsStore();
 
-const searchTermIsActive = computed(() => store.$state.filter.searchTerm.length > 0);
+const searchTermIsActive = computed(() => store.filter.searchTerm.length > 0);
 
 watch(searchTermIsActive, () => {
   store.filter.advancedSearch.gender = '';

@@ -26,7 +26,7 @@ async function fetchPostsForCurrentPage() {
 
 <template>
   <q-pagination
-    v-model="store.$state.pagination.currentPage"
+    v-model="store.pagination.currentPage"
     boundary-numbers
     direction-links
     :ellipses="true"
