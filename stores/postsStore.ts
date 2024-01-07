@@ -20,6 +20,7 @@ export const usePostsStore = defineStore('posts', {
       firstPostIndex: 0,
       lastPostIndex: 9,
     },
+    loading: false,
   }),
 
   actions: {
