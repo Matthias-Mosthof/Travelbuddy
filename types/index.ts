@@ -32,7 +32,10 @@ declare global {
 
   export interface SearchFilter {
     searchTerm: string;
-    ageRange: AgeRange;
-    gender: string | 'M' | 'W' | 'D';
+    advancedSearch: {
+      isActive: boolean;
+      ageRange: AgeRange;
+      gender: string | 'M' | 'W' | 'D';
+    };
   }
 }
