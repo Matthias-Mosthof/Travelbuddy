@@ -45,7 +45,7 @@ function onSubmit() {
 </script>
 
 <template>
-  <q-page-sticky
+  <!-- <q-page-sticky
     :offset="[18, 18]"
     position="bottom-right"
   >
@@ -62,91 +62,92 @@ function onSubmit() {
     v-model="toggleCard"
     persistent
   >
-    <div>
-      <q-form
-        class="q-gutter-md"
-        @reset="onReset"
-        @submit="onSubmit"
-      >
-        <q-input
-          v-model="postTitle"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Überschrift"
-          required
-          standout="bg-green-4 text-white"
-          type="text"
-        />
-        <q-input
-          ref="newPost"
-          v-model="postText"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Deine Beschreibung"
-          required
-          standout="bg-green-4 text-white"
-          type="textarea"
-        />
+    <div> -->
+  <q-form
+    class="q-gutter-md"
+    @reset="onReset"
+    @submit="onSubmit"
+  >
+    <q-input
+      v-model="postTitle"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Der Titel deiner Anzeige"
+      required
+      standout="bg-green-4 text-white"
+      type="text"
+    />
+    <q-input
+      ref="newPost"
+      v-model="postText"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Deine Beschreibung"
+      required
+      standout="bg-green-4 text-white"
+      type="textarea"
+    />
 
-        <q-input
-          ref="newPost"
-          v-model="postName"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Dein Vorname"
-          required
-          standout="bg-green-4 text-white"
-          type="text"
-        />
-        <q-input
-          ref="newPost"
-          v-model="postAge"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Dein Alter"
-          required
-          standout="bg-green-4 text-white"
-          type="number"
-        />
-        <q-select
-          v-model="postGender"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Geschlecht"
-          :options="genderOptions"
-          standout="bg-green-4 text-white"
-        />
-        <q-input
-          ref="newPost"
-          v-model="postEmail"
-          class="rounded-borders bg-green-3"
-          filled
-          label="Deine E-Mail (wird nicht veröffentlicht)"
-          required
-          standout="bg-green-4 text-white"
-          type="email"
-        />
-        <!-- <q-input
+    <q-input
+      ref="newPost"
+      v-model="postName"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Dein Vorname"
+      required
+      standout="bg-green-4 text-white"
+      type="text"
+    />
+    <q-input
+      ref="newPost"
+      v-model="postAge"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Dein Alter"
+      required
+      standout="bg-green-4 text-white"
+      type="number"
+    />
+    <q-select
+      v-model="postGender"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Geschlecht"
+      :options="genderOptions"
+      standout="bg-green-4 text-white"
+    />
+    <q-input
+      ref="newPost"
+      v-model="postEmail"
+      class="rounded-borders bg-green-3"
+      filled
+      label="Deine E-Mail (wird nicht veröffentlicht)"
+      required
+      standout="bg-green-4 text-white"
+      type="email"
+    />
+    <!-- <q-input
           filled
           v-model="sheetCategory"
           type="text"
           label="Kategorie (optional)"
           ref="newSheet"
         /> -->
-        <q-btn
-          color="primary"
-          icon="check"
-          label="Veröffentlichen"
-          type="submit"
-        />
-        <q-btn
-          v-close-popup
-          color="secondary"
-          icon="cancel"
-          label="Abbrechen"
-          type="cancel"
-        />
-      </q-form>
+    <q-btn
+      color="primary"
+      icon="check"
+      label="Veröffentlichen"
+      type="submit"
+    />
+    <q-btn
+      v-close-popup
+      color="secondary"
+      icon="cancel"
+      label="Abbrechen"
+      type="cancel"
+    />
+    <!-- </q-form>
     </div>
-  </q-dialog>
+  </q-dialog> -->
+  </q-form>
 </template>
