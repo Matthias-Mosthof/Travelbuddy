@@ -56,24 +56,6 @@ function onSubmit() {
 </script>
 
 <template>
-  <!-- <q-page-sticky
-    :offset="[18, 18]"
-    position="bottom-right"
-    >
-    <q-btn
-    color="primary"
-    fab
-    icon="add"
-    label="Add new Post"
-    @click="toggleCard = true"
-    />
-  </q-page-sticky>
-
-  <q-dialog
-  v-model="toggleCard"
-  persistent
-  >
-  <div> -->
   <q-form
     class="q-gutter-md"
     @reset="onReset"
