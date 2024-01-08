@@ -20,6 +20,5 @@ onMounted(async () => {
 <template>
   <q-page-container>
     <GeneralPostPanel />
-    <PostAdd />
   </q-page-container>
 </template>
