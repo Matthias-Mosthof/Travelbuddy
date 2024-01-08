@@ -8,6 +8,7 @@ declare global {
     age: number;
     gender: string | 'männlich' | 'weiblich' | 'divers';
     email: string;
+    theme: string;
     released: boolean | false;
     rejected: boolean | false;
   }
