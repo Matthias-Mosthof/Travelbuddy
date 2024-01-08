@@ -8,7 +8,7 @@
     <NavBars />
     <q-page-container>
       <q-page
-        class="q-pa-md"
+        class="q-pa-xl"
         padding
       >
         <slot />

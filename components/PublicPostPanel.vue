@@ -62,8 +62,6 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
           :email="post.email"
           :name="post.name"
         />
-
-        <PostAdd />
       </q-card>
       <PublicPostPagination key="5" />
     </TransitionGroup>

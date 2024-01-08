@@ -70,60 +70,62 @@ function onSubmit() {
   >
     <q-input
       v-model="postTitle"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders"
       filled
       label="Der Titel deiner Anzeige"
       required
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1 text-black"
       type="text"
     />
     <q-input
       ref="newPost"
       v-model="postText"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders"
       filled
       label="Deine Beschreibung"
+      outlined
       required
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1"
       type="textarea"
     />
 
     <q-input
       ref="newPost"
       v-model="postName"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders"
       filled
-      label="Dein Vorname"
+      label="Dein Vorname oder Spitzname (dieser Name wird öffentlich angezeigt)"
+      outlined
       required
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1 text-black"
       type="text"
     />
     <q-input
       ref="newPost"
       v-model="postAge"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders  "
       filled
       label="Dein Alter"
       required
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1 text-black"
       type="number"
     />
     <q-select
       v-model="postGender"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders"
       filled
       label="Geschlecht"
       :options="genderOptions"
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1 text-black"
     />
     <q-input
       ref="newPost"
       v-model="postEmail"
-      class="rounded-borders bg-green-3"
+      class="rounded-borders"
       filled
       label="Deine E-Mail (wird nicht veröffentlicht)"
       required
-      standout="bg-green-4 text-white"
+      standout="bg-teal-1 text-black"
       type="email"
     />
     <!-- <q-input

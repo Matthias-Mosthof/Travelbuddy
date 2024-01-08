@@ -9,7 +9,14 @@ const store = usePostsStore();
 </script>
 
 <template>
-  <q-page-container>
+  <div class="container q-mx-auto">
+    <h1>Anzeige aufgeben</h1>
     <PostAdd />
-  </q-page-container>
+  </div>
 </template>
+
+<style lang="scss">
+.container {
+  max-width: 90rem;
+}
+</style>
