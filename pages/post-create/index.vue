@@ -11,7 +11,7 @@ const store = usePostsStore();
 <template>
   <div class="container q-mx-auto">
     <h1>Anzeige aufgeben</h1>
-    <PostAdd />
+    <PostCreate />
   </div>
 </template>
 

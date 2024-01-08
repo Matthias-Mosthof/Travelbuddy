@@ -21,8 +21,11 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
       Postübersicht
     </h1>
     <SearchOverview />
+
     <q-btn
+      class="offset-1"
       icon="explore"
+      icon-right="arrow_right"
       label="Eigene Anzeige aufgeben"
       outlined
       @click="async() => await navigateTo('post-create')"
@@ -41,6 +44,7 @@ const filterIsActive = computed(() => store.getAnyFilterIsActive);
       v-if="posts.length < 1 && !filterIsActive"
       class="one-post"
     />
+
     <PublicPosts :posts="posts" />
   </div>
 </template>
