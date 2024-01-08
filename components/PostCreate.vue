@@ -4,8 +4,17 @@ const toggleCard = ref(false);
 const postsStore = usePostsStore();
 const { addPost } = postsStore;
 
+const fieldRef = ref(null);
 const newPost = ref();
-const genderOptions = ref(['männlich', 'weiblich', 'divers']);
+
+const themeOptions = ref(
+  ['Standard',
+    'Winter',
+    'Sommer',
+    'Herbst',
+    'Frühling',
+    'Weltreise'],
+);
 
 const postTitle = ref('');
 const postText = ref('');
@@ -13,7 +22,8 @@ const postEmail = ref('');
 const postAge = ref(0);
 const postGender = ref('');
 const postName = ref('');
-// const postCategory = ref();
+const postTheme = ref('');
+
 const userInput = computed((): NewPost => ({
   title: postTitle.value,
   text: postText.value,
@@ -21,6 +31,7 @@ const userInput = computed((): NewPost => ({
   age: postAge.value,
   gender: postGender.value,
   email: postEmail.value,
+  theme: postTheme.value,
   released: false,
   rejected: false,
 }));
@@ -48,21 +59,21 @@ function onSubmit() {
   <!-- <q-page-sticky
     :offset="[18, 18]"
     position="bottom-right"
-  >
+    >
     <q-btn
-      color="primary"
-      fab
-      icon="add"
-      label="Add new Post"
-      @click="toggleCard = true"
+    color="primary"
+    fab
+    icon="add"
+    label="Add new Post"
+    @click="toggleCard = true"
     />
   </q-page-sticky>
 
   <q-dialog
-    v-model="toggleCard"
-    persistent
+  v-model="toggleCard"
+  persistent
   >
-    <div> -->
+  <div> -->
   <q-form
     class="q-gutter-md"
     @reset="onReset"
@@ -88,53 +99,80 @@ function onSubmit() {
       standout="bg-teal-1"
       type="textarea"
     />
+    <div class="row q-gutter-md q-ml-none">
+      <q-input
+        ref="newPost"
+        v-model="postName"
+        class="rounded-borders"
+        filled
+        hint="Dieser Name wird öffentlich angezeigt"
+        label="Dein Vorname oder Spitzname"
+        outlined
+        required
+        standout="bg-teal-1 text-black"
+        style="min-width: 20rem;"
+        type="text"
+      />
+      <q-input
+        ref="newPost"
+        v-model="postAge"
+        class="rounded-borders  "
+        filled
+        label="Dein Alter"
+        required
+        standout="bg-teal-1 text-black"
+        type="number"
+      />
+    </div>
 
-    <q-input
-      ref="newPost"
-      v-model="postName"
-      class="rounded-borders"
-      filled
-      label="Dein Vorname oder Spitzname (dieser Name wird öffentlich angezeigt)"
-      outlined
-      required
-      standout="bg-teal-1 text-black"
-      type="text"
-    />
-    <q-input
-      ref="newPost"
-      v-model="postAge"
-      class="rounded-borders  "
-      filled
-      label="Dein Alter"
-      required
-      standout="bg-teal-1 text-black"
-      type="number"
-    />
-    <q-select
-      v-model="postGender"
-      class="rounded-borders"
-      filled
-      label="Geschlecht"
-      :options="genderOptions"
-      standout="bg-teal-1 text-black"
-    />
+    <div class="row items-center content-center">
+      Du bist:
+      <q-field
+        ref="fieldRef"
+        v-model="postGender"
+        filled
+        :rules="[value => !!value || 'Field is required']"
+        stack-label
+      >
+        <q-radio
+          v-model="postGender"
+          checked-icon="female"
+          label="Weiblich"
+          size="xs"
+          val="w"
+        />
+
+        <q-radio
+          v-model="postGender"
+          checked-icon="male"
+          label="Männlich"
+          size="xs"
+          unchecked-icon="panorama_fish_eye"
+          val="m"
+        />
+      </q-field>
+    </div>
     <q-input
       ref="newPost"
       v-model="postEmail"
       class="rounded-borders"
       filled
-      label="Deine E-Mail (wird nicht veröffentlicht)"
+      label="Deine E-Mail (wird nicht öffentlich angezeigt)"
       required
       standout="bg-teal-1 text-black"
       type="email"
     />
-    <!-- <q-input
-          filled
-          v-model="sheetCategory"
-          type="text"
-          label="Kategorie (optional)"
-          ref="newSheet"
-        /> -->
+    <q-select
+      ref="newPost"
+      v-model="postTheme"
+      class="rounded-borders"
+      filled
+      label="Das Aussehen deines Posts"
+      :options="themeOptions"
+      required
+      standout="bg-teal-1 text-black"
+      type="email"
+    />
     <q-btn
       color="primary"
       icon="check"
@@ -148,8 +186,5 @@ function onSubmit() {
       label="Abbrechen"
       type="cancel"
     />
-    <!-- </q-form>
-    </div>
-  </q-dialog> -->
   </q-form>
 </template>
