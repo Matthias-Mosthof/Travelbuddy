@@ -25,7 +25,7 @@ function triggerAdvancedSearch() {
           <SearchRange />
         </div>
         <div class="row items-center">
-          <SearchRadio />
+          <GenderRadioButtons />
         </div>
         <q-btn
           color="primary"
